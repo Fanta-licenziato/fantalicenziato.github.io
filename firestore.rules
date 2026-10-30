@@ -31,6 +31,30 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // portafogli a quote: ognuno scrive solo il suo
+    match /pos/{uid} {
+      allow read: if signed();
+      allow write: if active() && request.auth.uid == uid;
+      allow delete: if isAdmin();
+    }
+
+    // eventi Sì/No: chiunque li crea, chi li ha creati li decide dopo la chiusura, l'admin sempre
+    match /events/{id} {
+      allow read: if signed();
+      allow create: if active()
+        && request.resource.data.by == request.auth.uid
+        && request.resource.data.q is string
+        && request.resource.data.q.size() >= 5 && request.resource.data.q.size() <= 120
+        && request.resource.data.status == 'open'
+        && (request.resource.data.feat == false || isAdmin());
+      allow update: if isAdmin() || (active()
+        && resource.data.by == request.auth.uid
+        && request.time.toMillis() >= resource.data.closeAt
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','resolvedBy','resolvedAt'])
+        && request.resource.data.status in ['yes','no','void']);
+      allow delete: if isAdmin();
+    }
+
     match /banned/{uid} {
       allow read: if signed();
       allow write: if isAdmin();

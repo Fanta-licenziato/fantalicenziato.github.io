@@ -279,6 +279,57 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
   padding:11px 18px;border-radius:14px;font-size:14px;max-width:calc(100% - 32px);box-shadow:0 12px 30px rgba(0,0,0,.5);animation:rise .3s}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<style>
+/* eventi sì/no */
+.ev-card{padding:16px;display:flex;flex-direction:column;gap:12px;animation:rise .45s both;animation-delay:var(--d,0ms)}
+.ev-card.feat{border:1px solid rgba(255,163,26,.45);background:linear-gradient(160deg,rgba(255,163,26,.18),rgba(61,139,255,.08) 60%,rgba(255,255,255,.02));box-shadow:0 20px 50px -25px rgba(255,163,26,.6)}
+.ev-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.ev-q{font-family:var(--f-disp);font-weight:800;font-size:24px;line-height:1.1;text-transform:none;letter-spacing:0;overflow-wrap:anywhere}
+.ev-card.feat .ev-q{font-size:30px}
+.feat-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-num);font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1a0f00;background:var(--oil);border-radius:999px;padding:4px 10px}
+.clock{font-family:var(--f-num);font-size:11px;color:var(--oil2);white-space:nowrap}
+.clock.late{color:var(--red)}
+.split{display:flex;height:12px;border-radius:6px;overflow:hidden;background:rgba(255,255,255,.07)}
+.split .y{background:linear-gradient(90deg,#1aa97a,var(--green));transition:width .8s cubic-bezier(.2,1,.3,1)}
+.split .n{background:linear-gradient(90deg,var(--red),#d93246);flex:1}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.yn button{border-radius:14px;padding:12px;border:1px solid;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:16px}
+.yn .ys{background:rgba(34,211,154,.12);border-color:rgba(34,211,154,.45);color:var(--green)}
+.yn .no{background:rgba(255,77,94,.12);border-color:rgba(255,77,94,.45);color:#ff7b88}
+.yn button span{font-family:var(--f-num);font-size:14px;opacity:.9}
+.ev-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.mypos{font-family:var(--f-num);color:var(--oil2)}
+.res{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-disp);font-weight:900;font-size:18px;text-transform:uppercase;padding:2px 10px;border-radius:8px;border:2px solid}
+.res.y{color:var(--green)}.res.n{color:var(--red)}.res.v{color:var(--muted)}
+.decide{display:grid;grid-template-columns:1fr 1fr auto;gap:8px}
+.fab{display:flex;gap:8px}
+.fab .btn{flex:1}
+.pos-box{background:rgba(255,163,26,.08);border:1px solid rgba(255,163,26,.3);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.pos-box .r{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.pos-box b{font-family:var(--f-num);color:var(--ink)}
+.pos-box .gain{color:var(--green)}.pos-box .loss{color:var(--red)}
+.sell{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.seg button{background:var(--glass2);border:1px solid var(--line);border-radius:12px;padding:10px 4px;font-size:13px;font-weight:700}
+.seg button[aria-pressed="true"]{background:rgba(61,139,255,.25);border-color:var(--blue);color:#fff}
+.side-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.side-tabs button{border-radius:14px;padding:12px;font-weight:800;font-size:16px;border:1px solid var(--line);background:var(--glass)}
+.side-tabs button.on.y{background:rgba(34,211,154,.2);border-color:var(--green);color:var(--green)}
+.side-tabs button.on.n{background:rgba(255,77,94,.2);border-color:var(--red);color:#ff7b88}
+.check{display:flex;align-items:center;gap:10px;font-size:14px}
+.check input{width:20px;height:20px;accent-color:var(--oil)}
+input[type=time]{font:inherit;color:var(--ink);background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.helpbtn{width:38px;height:38px;flex:none;border-radius:50%;background:var(--glass);border:1px solid var(--line);font-family:var(--f-disp);font-weight:900;font-size:20px;color:var(--oil2)}
+.guide{display:flex;flex-direction:column;gap:8px}
+.gd{background:var(--glass);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.gd summary{cursor:pointer;list-style:none;padding:14px 16px;font-family:var(--f-disp);font-weight:800;font-size:19px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.gd summary::-webkit-details-marker{display:none}
+.gd summary::after{content:"+";color:var(--oil2);font-size:22px}
+.gd[open] summary::after{content:"–"}
+.gd div{padding:0 16px 14px;color:#c8d3e3;font-size:14.5px;line-height:1.55}
+.gd p{margin:0 0 8px}.gd b{color:var(--ink)}
+</style>
+
 </head>
 <body>
 
@@ -290,7 +341,7 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 </svg>
 
 <section class="login" id="login" hidden>
-  <div class="mark"><svg><use href="#mark"/></svg><h1>Fanta<span>Licenziato</span></h1><div class="tagline">Il mercato interno di reparto. Punta su chi salta per primo.</div></div>
+  <div class="mark"><svg><use href="#mark"/></svg><h1>Fanta<span>Licenziato</span></h1><div class="tagline">Il mercato interno di reparto. Punta su tutto quello che succede.</div></div>
   <form id="loginForm" class="glass" autocomplete="on">
     <label class="label" for="lNick">Soprannome</label>
     <input type="text" id="lNick" maxlength="24" autocomplete="username" autocapitalize="off" required>
@@ -316,14 +367,14 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 <div class="wrap">
   <header class="appbar">
     <div class="logo"><svg><use href="#mark"/></svg><div><b>Fanta<span>Licenziato</span></b><small>BETA · MERCATO INTERNO</small></div></div>
-    <button class="me" id="logout" type="button" aria-label="Esci"><span class="mini" id="uAva">?</span><span id="uNick"></span><i id="uAdmin" hidden>ADMIN</i></button>
+    <div style="display:flex;gap:8px;align-items:center;min-width:0"><button class="helpbtn" data-sheet="guide" type="button" aria-label="Come si gioca">?</button><button class="me" id="logout" type="button" aria-label="Esci"><span class="mini" id="uAva">?</span><span id="uNick"></span><i id="uAdmin" hidden>ADMIN</i></button></div>
   </header>
 
   <section class="glass hero">
     <div>
       <span class="label">Crediti disponibili</span>
       <div class="big"><span id="wSaldo">1000</span><small>cr</small></div>
-      <div class="pills"><span class="pill">In gioco <b id="wGioco">0</b></span><span class="pill win">Vinti <b id="wVinti">0</b></span></div>
+      <div class="pills"><span class="pill">In gioco <b id="wGioco">0</b></span><span class="pill win">Patrimonio <b id="wTot">1000</b></span></div>
     </div>
     <div class="gauge" aria-label="Pressione del mercato">
       <svg viewBox="0 0 140 128" role="img">
@@ -343,15 +394,15 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 
   <main id="view" class="wrap" style="gap:12px"></main>
 
-  <p class="foot">Crediti finti, si parte da 1000. Il rischio di ognuno sale con le puntate su di lui. Quando qualcuno viene licenziato, chi ci aveva puntato incassa alla quota del momento.</p>
+  <p class="foot">Crediti finti, si parte da 1000. Compri quote del Sì, del No o di un candidato: se hai ragione ogni quota vale 1 credito. Puoi rivendere prima della chiusura al prezzo del momento (commissione 2%).</p>
 </div>
 
 <nav class="nav" role="tablist">
   <button role="tab" id="tab-mercato" aria-selected="true" data-t="mercato"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 4 4 8-9M15 7h5v5"/></svg><span>Mercato</span></button>
+  <button role="tab" id="tab-eventi" aria-selected="false" data-t="eventi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Eventi</span></button>
   <button role="tab" id="tab-classifica" aria-selected="false" data-t="classifica"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg><span>Classifica</span></button>
-  <button role="tab" id="tab-movimenti" aria-selected="false" data-t="movimenti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13l-3-3M21 17H8l3 3"/></svg><span>Movimenti</span></button>
   <button role="tab" id="tab-bacheca" aria-selected="false" data-t="bacheca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Bacheca</span></button>
-  <button role="tab" id="tab-rosa" aria-selected="false" data-t="rosa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg><span>Candidati</span></button>
+  <button role="tab" id="tab-attivita" aria-selected="false" data-t="attivita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13l-3-3M21 17H8l3 3"/></svg><span>Attività</span></button>
 </nav>
 <div id="sheet"></div>
 </div>
@@ -365,8 +416,9 @@ input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;bac
 <script src="config.js"></script>
 <script>
 const CFG=window.FL_CONFIG||{};
-const START=CFG.startCredits||1000, BASE=100, DOMAIN="fanta-licenziato.app";
-const S={tab:"mercato",players:[],bets:{},esiti:{},me:null,canEdit:false,names:{},open:null,db:null,ready:false,unsub:[],posts:[],myPosts:new Set(),authors:{},banned:{},lastPct:{},shownSaldo:null};
+const START=CFG.startCredits||1000, BASE=100, EBASE=100, FEE=0.02, DOMAIN="fanta-licenziato.app";
+const S={tab:"mercato",players:[],esiti:{},events:{},pos:{},names:{},banned:{},me:null,canEdit:false,db:null,ready:false,unsub:[],
+  posts:[],myPosts:new Set(),authors:{},sheet:null,lastPct:{},shownSaldo:null};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=n=>Math.round(n).toLocaleString("it-IT");
@@ -379,140 +431,156 @@ function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)|
 function hue(n){let h=0;for(const c of String(n))h=(h*37+c.charCodeAt(0))%360;return h}
 function ini(n){n=String(n||"?");const w=n.replace(/[^\p{L}\p{N} ]/gu,"").trim().split(/\s+/).filter(x=>!/^(il|lo|la|sig|re|del|di|zio)$/i.test(x));return (((w[0]||n)[0]||"?")+(w[1]?w[1][0]:"")).toUpperCase()}
 const ICON={trash:'<svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
-  bet:'<svg viewBox="0 0 24 24"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg>',
-  fire:'<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
+  buy:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',sell:'<svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>',
+  fire:'<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',ev:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  ok:'<svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>'};
 
-/* ---------- calcolo mercato ---------- */
-function stakesOn(){const t={};for(const u in S.bets){const st=S.bets[u].stakes||{};for(const p in st)t[p]=(t[p]||0)+(+st[p]||0)}return t}
-function market(){
-  const st=stakesOn();
-  const act=S.players.filter(p=>!S.esiti[p.id]);
-  const tot=act.reduce((a,p)=>a+BASE+(st[p.id]||0),0)||1;
-  const m={};
-  for(const p of S.players){
-    const s=st[p.id]||0;
-    if(S.esiti[p.id]){m[p.id]={pct:null,q:S.esiti[p.id].quota,s,fired:true};continue}
-    const pct=(BASE+s)/tot;
-    m[p.id]={pct,q:Math.max(1.05,1/pct),s,fired:false};
-  }
-  return m;
-}
-function level(pct,n){const r=pct*Math.max(n,1); // rapporto rispetto alla media
-  if(r>=2)return{t:"Critico",c:"var(--red)"};if(r>=1.3)return{t:"Alto",c:"var(--oil)"};if(r>=.85)return{t:"Medio",c:"var(--yellow)"};return{t:"Basso",c:"var(--green)"}}
-function walletOf(uid){
-  const st=(S.bets[uid]||{}).stakes||{};let gioco=0,vinti=0,spesi=0;
-  for(const p in st){spesi+=+st[p]||0;if(S.esiti[p])vinti+=st[p]*S.esiti[p].quota;else gioco+=+st[p]||0}
-  return{saldo:START-spesi+vinti,gioco,vinti};
-}
+/* ================= motore di mercato ================= */
+const candKey=pid=>"c_"+pid, evKey=(eid,s)=>"e_"+eid+"_"+s;
+function parseKey(k){const p=k.split("_");return p[0]==="c"?{t:"c",id:p.slice(1).join("_")}:{t:"e",id:p.slice(1,-1).join("_"),side:p[p.length-1]}}
+function poolOf(k){let t=0;for(const u in S.pos){const x=(S.pos[u].pos||{})[k];if(x&&x.sh>1e-9)t+=Math.max(0,x.cost)}return t}
+function activeCands(){return S.players.filter(p=>!S.esiti[p.id])}
+function candPrice(pid,extra=0){const act=activeCands();const k=candKey(pid);
+  const tot=act.reduce((a,p)=>a+BASE+poolOf(candKey(p.id)),0)+extra;return Math.min(.99,Math.max(.01,(BASE+poolOf(k)+extra)/(tot||1)))}
+function evPrice(eid,side,extra=0){const y=poolOf(evKey(eid,"Y"))+(side==="Y"?extra:0),n=poolOf(evKey(eid,"N"))+(side==="N"?extra:0);
+  const py=(EBASE+y)/(2*EBASE+y+n);return Math.min(.99,Math.max(.01,side==="Y"?py:1-py))}
+function priceOf(k,extra=0){const p=parseKey(k);return p.t==="c"?candPrice(p.id,extra):evPrice(p.id,p.side,extra)}
+function evState(e){if(!e)return"gone";if(e.status&&e.status!=="open")return e.status;return Date.now()<e.closeAt?"open":"pending"}
+function isOpen(k){const p=parseKey(k);if(p.t==="c"){return !!S.players.find(x=>x.id===p.id)&&!S.esiti[p.id]}return evState(S.events[p.id])==="open"}
+function settle(k,x){const p=parseKey(k); // valore finale o null se ancora aperto
+  if(p.t==="c"){if(S.esiti[p.id])return x.sh;if(!S.players.find(q=>q.id===p.id))return x.cost;return null}
+  const st=evState(S.events[p.id]);if(st==="gone"||st==="void")return x.cost;if(st==="yes")return p.side==="Y"?x.sh:0;if(st==="no")return p.side==="N"?x.sh:0;return null}
+function walletOf(uid){const d=S.pos[uid]||{};let cash=d.cash??START,settled=0,gioco=0;
+  for(const k in (d.pos||{})){const x=d.pos[k];if(!x||x.sh<1e-9)continue;const v=settle(k,x);if(v!=null)settled+=v;else gioco+=x.sh*priceOf(k)}
+  const avail=cash+settled;return{avail,gioco,tot:avail+gioco}}
+function myPos(k){const x=((S.pos[S.me]||{}).pos||{})[k];return x&&x.sh>1e-9?x:null}
+function quoteBuy(k,a){const p0=priceOf(k),p1=priceOf(k,a);const avg=(p0+p1)/2;return{sh:a/avg,p1,avg}}
+function quoteSell(k,frac){const x=myPos(k);if(!x)return null;const sh=x.sh*frac,c=x.cost*frac;const p0=priceOf(k),p1=priceOf(k,-c);return{sh,c,got:sh*(p0+p1)/2*(1-FEE),p1}}
+async function writeMe(fn){const d=S.pos[S.me]||{};const doc={cash:d.cash??START,pos:JSON.parse(JSON.stringify(d.pos||{})),log:[...(d.log||[])]};fn(doc);doc.log=doc.log.slice(-250);
+  await S.db.collection("pos").doc(S.me).set(doc)}
+async function buy(k,a){a=Math.floor(a);const w=walletOf(S.me);
+  if(a<1)return toast("Inserisci almeno 1 credito.");if(a>w.avail+1e-6)return toast("Crediti insufficienti.");if(!isOpen(k))return toast("Questo mercato è chiuso.");
+  const q=quoteBuy(k,a);
+  try{await writeMe(d=>{const x=d.pos[k]||{sh:0,cost:0};x.sh+=q.sh;x.cost+=a;d.pos[k]=x;d.cash-=a;d.log.push({t:"b",k,a,sh:+q.sh.toFixed(3),at:Date.now()})});
+    S.sheet=null;render();toast(`Comprate ${fmt(q.sh)} quote per ${a} cr.`)}catch(e){toast("Operazione non salvata: controlla la connessione.")}}
+async function sell(k,frac){if(!isOpen(k))return toast("Mercato chiuso: aspetta l'esito.");const q=quoteSell(k,frac);if(!q)return;
+  try{await writeMe(d=>{const x=d.pos[k];x.sh-=q.sh;x.cost-=q.c;if(x.sh<1e-6)delete d.pos[k];d.cash+=q.got;d.log.push({t:"s",k,a:+q.got.toFixed(2),sh:+q.sh.toFixed(3),at:Date.now()})});
+    S.sheet=null;render();toast(`Venduto: incassi ${fmt(q.got)} cr.`)}catch(e){toast("Operazione non salvata: controlla la connessione.")}}
+function level(p,n){const r=p*Math.max(n,1);if(r>=2)return{t:"Critico",c:"var(--red)"};if(r>=1.3)return{t:"Alto",c:"var(--oil)"};if(r>=.85)return{t:"Medio",c:"var(--yellow)"};return{t:"Basso",c:"var(--green)"}}
+function closesIn(e){const d=e.closeAt-Date.now();if(d<=0)return"chiuso";const h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4);return h>=24?"chiude "+when(e.closeAt):h?`chiude tra ${h}h ${m}m`:`chiude tra ${m} min`}
+function evVolume(eid){return poolOf(evKey(eid,"Y"))+poolOf(evKey(eid,"N"))}
 
-/* ---------- testata ---------- */
-function gauge(){
-  const st=stakesOn();const tot=Object.values(st).reduce((a,b)=>a+b,0);
-  const bar=Math.round(tot/10), f=Math.min(1,bar/400);
-  $("#gArc").setAttribute("stroke-dasharray",`${f*100} 100`);
-  $("#gNeedle").setAttribute("transform",`rotate(${-125+250*f} 70 70)`);
-  $("#gVal").textContent=bar+" bar";
-}
+/* ================= testata ================= */
+function gauge(){let tot=0;for(const u in S.pos)for(const k in (S.pos[u].pos||{})){const x=S.pos[u].pos[k];if(x&&x.sh>1e-9&&isOpen(k))tot+=x.cost}
+  const bar=Math.round(tot/10),f=Math.min(1,bar/400);$("#gArc").setAttribute("stroke-dasharray",`${f*100} 100`);
+  $("#gNeedle").setAttribute("transform",`rotate(${-125+250*f} 70 70)`);$("#gVal").textContent=bar+" bar"}
 function ticks(){let g="";for(let i=0;i<=10;i++){const a=(-215+250*i/10)*Math.PI/180,R=i%5?40:38;
   g+=`<line x1="${70+44*Math.cos(a)}" y1="${70+44*Math.sin(a)}" x2="${70+R*Math.cos(a)}" y2="${70+R*Math.sin(a)}" stroke="rgba(255,255,255,${i%5?.3:.6})" stroke-width="${i%5?1:1.8}"/>`}$("#gTicks").innerHTML=g}
 function countTo(el,to){const from=S.shownSaldo??to;S.shownSaldo=to;if(from===to){el.textContent=fmt(to);return}
   const t0=performance.now(),d=700;const step=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=fmt(from+(to-from)*e);if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step)}
-function head(){
-  gauge();
-  const w=S.me?walletOf(S.me):{saldo:START,gioco:0,vinti:0};
-  countTo($("#wSaldo"),Math.round(w.saldo));$("#wGioco").textContent=fmt(w.gioco);$("#wVinti").textContent=fmt(w.vinti);
+function head(){gauge();const w=walletOf(S.me);countTo($("#wSaldo"),Math.round(w.avail));$("#wGioco").textContent=fmt(w.gioco);$("#wTot").textContent=fmt(w.tot);
   const n=S.names[S.me]||"";$("#uNick").textContent=n;$("#uAva").textContent=ini(n);$("#uAva").style.background=`linear-gradient(145deg,hsl(${hue(n)} 75% 55%),hsl(${hue(n)+50} 75% 38%))`;$("#uAdmin").hidden=!S.canEdit;
-  // ticker
-  const m=market(),prev=ls("fl_prev")||{};const act=S.players.filter(p=>!m[p.id].fired).sort((a,b)=>m[b.id].pct-m[a.id].pct);
-  if(act.length<2){$("#ticker").hidden=true;return}
-  const items=act.map(p=>{const x=m[p.id];const d=prev[p.id]!=null?(x.pct-prev[p.id])*100:0;
-    return `<span><b>${esc(p.name)}</b>${f1(x.pct*100)}% <i class="${d>0.05?"up":d<-0.05?"down":""}" style="font-style:normal">${d>0.05?"▲":d<-0.05?"▼":"•"}</i> q.${fq(x.q)}</span>`}).join("");
-  const sig=act.map(p=>p.id+m[p.id].pct.toFixed(4)).join();
-  if(head.sig!==sig){head.sig=sig;$("#tickRun").innerHTML=items+items;$("#tickRun").style.setProperty("--dur",Math.max(18,act.length*6)+"s")}
-  $("#ticker").hidden=false;
-}
+  const prev=ls("fl_prev")||{};const items=[];
+  activeCands().forEach(p=>{const pr=candPrice(p.id),d=prev[candKey(p.id)]!=null?(pr-prev[candKey(p.id)])*100:0;items.push({s:pr,h:`<span><b>${esc(p.name)}</b>${f1(pr*100)}% <i class="${d>.05?"up":d<-.05?"down":""}" style="font-style:normal">${d>.05?"▲":d<-.05?"▼":"•"}</i></span>`})});
+  Object.entries(S.events).filter(([id,e])=>evState(e)==="open").forEach(([id,e])=>{const py=evPrice(id,"Y");items.push({s:py,h:`<span><b>${esc(e.q.slice(0,40))}${e.q.length>40?"…":""}</b>Sì ${f1(py*100)}%</span>`})});
+  if(items.length<2){$("#ticker").hidden=true;return}
+  const html=items.map(i=>i.h).join(""),sig=html;if(head.sig!==sig){head.sig=sig;$("#tickRun").innerHTML=html+html;$("#tickRun").style.setProperty("--dur",Math.max(18,items.length*6)+"s")}
+  $("#ticker").hidden=false}
 
-/* ---------- viste ---------- */
-function deltaHtml(id,x,prev){if(prev[id]==null)return"";const d=(x.pct-prev[id])*100;if(Math.abs(d)<.05)return`<span class="delta" style="color:var(--dim)">= stabile</span>`;
+/* ================= viste ================= */
+function deltaHtml(k,p,prev){if(prev[k]==null)return"";const d=(p-prev[k])*100;if(Math.abs(d)<.05)return`<span class="delta" style="color:var(--dim)">= stabile</span>`;
   return `<span class="delta ${d>0?"up":"down"}">${d>0?"▲":"▼"} ${f1(Math.abs(d))} pt</span>`}
-function vMercato(){
-  if(!S.players.length)return empty("Nessun candidato","Aggiungi i primi nomi dalla scheda Candidati: da lì parte il mercato.",`<button class="btn primary" data-go="rosa">Aggiungi candidati</button>`);
-  const m=market(), prev=ls("fl_prev")||{}, mine=(S.bets[S.me]||{}).stakes||{};
-  const act=S.players.filter(p=>!m[p.id].fired).sort((a,b)=>m[b.id].pct-m[a.id].pct);
-  const fired=S.players.filter(p=>m[p.id].fired).sort((a,b)=>(S.esiti[b.id].at||0)-(S.esiti[a.id].at||0));
-  const n=act.length;let out="";
-  if(act.length){
-    const p=act[0],x=m[p.id],lv=level(x.pct,n);
-    out+=`<section class="glass fav">
-      <span class="tag">Favorito al licenziamento</span>
-      <div class="fav-body">
-        <div class="ring" style="--p:${(x.pct*100).toFixed(1)};--c:var(--red)"><div><b>${f1(x.pct*100)}%</b><small>rischio</small></div></div>
-        <div style="min-width:0"><h3>${esc(p.name)}</h3><div class="sub">${p.reparto?esc(p.reparto)+" · ":""}<span style="color:${lv.c};font-weight:700">Rischio ${lv.t.toLowerCase()}</span> ${deltaHtml(p.id,x,prev)}</div>
-          <div class="stats"><div><span class="label">Quota</span><b>${fq(x.q)}</b></div><div><span class="label">Puntati</span><b>${fmt(x.s)}</b></div>${mine[p.id]?`<div><span class="label">Tuoi</span><b style="color:var(--oil2)">${fmt(mine[p.id])}</b></div>`:""}</div></div>
-      </div>
-      <div class="cta"><button class="btn primary wide" data-open="${p.id}">Punta su ${esc(p.name)}</button></div>
-    </section>`;
-  }
-  if(act.length>1){
-    out+=`<div class="sec-h"><h2>Rischio licenziamento</h2><span>tocca per puntare</span></div><div class="list">`;
-    act.slice(1).forEach((p,k)=>{const x=m[p.id],lv=level(x.pct,n),i=k+2;
-      const fl=S.lastPct[p.id]!=null&&Math.abs(S.lastPct[p.id]-x.pct)>1e-6?(x.pct>S.lastPct[p.id]?" flash-up":" flash-down"):"";
-      out+=`<button class="row${fl}" data-open="${p.id}" style="--d:${k*40}ms">
-        <span class="ava" style="--h:${hue(p.name)}">${ini(p.name)}<i>${i}</i></span>
-        <span class="who"><b>${esc(p.name)}</b><span class="meta"><span class="lvl" style="color:${lv.c}">${lv.t}</span>${p.reparto?`<span>${esc(p.reparto)}</span>`:""}${mine[p.id]?`<span class="mine">tuoi ${fmt(mine[p.id])}</span>`:""}</span></span>
-        <span class="right"><span class="risk" style="color:${lv.c}">${f1(x.pct*100)}%</span>${deltaHtml(p.id,x,prev)||`<span class="delta" style="color:var(--dim)">q. ${fq(x.q)}</span>`}</span>
-        <span class="meter"><i style="width:${(x.pct*100).toFixed(1)}%;--bw:${(100/Math.max(x.pct,.01)).toFixed(0)}%"></i></span>
-      </button>`});
-    out+=`</div>`;
-  }
-  if(fired.length){
-    out+=`<div class="sec-h"><h2>Già saltati</h2><span>${fired.length}</span></div><div class="list">`;
-    fired.forEach(p=>{const x=m[p.id];out+=`<div class="row fired">
-      <span class="ava" style="--h:${hue(p.name)}">${ini(p.name)}</span>
-      <span class="who"><b>${esc(p.name)}</b><span class="meta">pagato a ${fq(x.q)} · ${when(S.esiti[p.id].at)}</span></span>
-      <span class="right"><span class="stamp">Licenziato</span>${S.canEdit?`<button class="btn ghost sm" data-undo="${p.id}">Annulla</button>`:""}</span></div>`});
-    out+=`</div>`;
-  }
-  for(const p of act)S.lastPct[p.id]=m[p.id].pct;
-  return out;
-}
+function posTag(k){const x=myPos(k);return x?`<span class="mine">${fmt(x.sh)} quote</span>`:""}
 function empty(t,d,a=""){return `<div class="glass empty"><h3>${t}</h3><p>${d}</p>${a}</div>`}
 function nm(u){return S.names[u]||"Giocatore"}
 
+function vMercato(){
+  const act=activeCands().map(p=>({p,pr:candPrice(p.id)})).sort((a,b)=>b.pr-a.pr);
+  const fired=S.players.filter(p=>S.esiti[p.id]).sort((a,b)=>(S.esiti[b.id].at||0)-(S.esiti[a.id].at||0));
+  const prev=ls("fl_prev")||{},n=act.length;let out="";
+  if(!S.players.length)return empty("Nessun candidato","Aggiungi i primi nomi: da lì parte il mercato del rischio licenziamento.",`<button class="btn primary" data-sheet="addCand">Aggiungi candidato</button>`);
+  if(act.length){const {p,pr}=act[0],k=candKey(p.id),lv=level(pr,n),x=myPos(k);
+    out+=`<section class="glass fav"><span class="tag">Favorito al licenziamento</span>
+      <div class="fav-body"><div class="ring" style="--p:${(pr*100).toFixed(1)};--c:var(--red)"><div><b>${f1(pr*100)}%</b><small>rischio</small></div></div>
+        <div style="min-width:0"><h3>${esc(p.name)}</h3><div class="sub">${p.reparto?esc(p.reparto)+" · ":""}<span style="color:${lv.c};font-weight:700">Rischio ${lv.t.toLowerCase()}</span> ${deltaHtml(k,pr,prev)}</div>
+          <div class="stats"><div><span class="label">Paga</span><b>${fq(1/pr)}x</b></div><div><span class="label">Volume</span><b>${fmt(poolOf(k))}</b></div>${x?`<div><span class="label">Tue quote</span><b style="color:var(--oil2)">${fmt(x.sh)}</b></div>`:""}</div></div></div>
+      <div class="cta"><button class="btn primary wide" data-bet="${k}">${x?"Compra o vendi":"Punta su "+esc(p.name)}</button></div></section>`}
+  if(act.length>1){out+=`<div class="sec-h"><h2>Rischio licenziamento</h2><span>tocca per puntare</span></div><div class="list">`;
+    act.slice(1).forEach(({p,pr},j)=>{const k=candKey(p.id),lv=level(pr,n),i=j+2;
+      const fl=S.lastPct[k]!=null&&Math.abs(S.lastPct[k]-pr)>1e-6?(pr>S.lastPct[k]?" flash-up":" flash-down"):"";
+      out+=`<button class="row${fl}" data-bet="${k}" style="--d:${j*40}ms"><span class="ava" style="--h:${hue(p.name)}">${ini(p.name)}<i>${i}</i></span>
+        <span class="who"><b>${esc(p.name)}</b><span class="meta"><span class="lvl" style="color:${lv.c}">${lv.t}</span>${p.reparto?`<span>${esc(p.reparto)}</span>`:""}${posTag(k)}</span></span>
+        <span class="right"><span class="risk" style="color:${lv.c}">${f1(pr*100)}%</span>${deltaHtml(k,pr,prev)||`<span class="delta" style="color:var(--dim)">paga ${fq(1/pr)}x</span>`}</span>
+        <span class="meter"><i style="width:${(pr*100).toFixed(1)}%;--bw:${(100/Math.max(pr,.01)).toFixed(0)}%"></i></span></button>`});
+    out+=`</div>`}
+  if(fired.length){out+=`<div class="sec-h"><h2>Già saltati</h2><span>${fired.length}</span></div><div class="list">`;
+    fired.forEach(p=>{out+=`<div class="row fired"><span class="ava" style="--h:${hue(p.name)}">${ini(p.name)}</span>
+      <span class="who"><b>${esc(p.name)}</b><span class="meta">${when(S.esiti[p.id].at)}${posTag(candKey(p.id))?" · le tue quote pagano 1 cr":""}</span></span>
+      <span class="right"><span class="stamp">Licenziato</span>${S.canEdit?`<button class="btn ghost sm" data-undo="${p.id}">Annulla</button>`:""}</span></div>`});out+=`</div>`}
+  out+=`<div class="sec-h"><h2>Candidati</h2><span>${S.players.length}</span></div><section class="glass">${S.players.map(p=>`<div class="cand">
+    <span class="mini" style="--h:${hue(p.name)}">${ini(p.name)}</span><span><b>${esc(p.name)}</b><small>${esc(p.reparto||"—")}${S.esiti[p.id]?" · licenziato":""}</small></span>
+    ${S.canEdit?`<button class="iconbtn" data-del="${p.id}" aria-label="Rimuovi candidato">${ICON.trash}</button>`:"<span></span>"}</div>`).join("")}</section>
+    <button class="btn ghost wide" data-sheet="addCand">+ Aggiungi candidato</button>`;
+  for(const {p,pr} of act)S.lastPct[candKey(p.id)]=pr;
+  return out;
+}
+
+function evCard(id,e,i){const st=evState(e),py=evPrice(id,"Y"),pn=1-py,ky=evKey(id,"Y"),kn=evKey(id,"N"),xy=myPos(ky),xn=myPos(kn),canDecide=S.canEdit||e.by===S.me;
+  const feat=e.feat&&st==="open";
+  let body="";
+  if(st==="open")body=`<div class="split"><span class="y" style="width:${(py*100).toFixed(1)}%"></span><span class="n"></span></div>
+    <div class="yn"><button class="ys" data-bet="${ky}">Sì <span>${f1(py*100)}%</span></button><button class="no" data-bet="${kn}">No <span>${f1(pn*100)}%</span></button></div>`;
+  else if(st==="pending")body=`<div class="split"><span class="y" style="width:${(py*100).toFixed(1)}%"></span><span class="n"></span></div>
+    <p class="note" style="margin:0">Chiuso, in attesa dell'esito. Ultimo prezzo: Sì ${f1(py*100)}%.</p>
+    ${canDecide?`<div class="decide"><button class="btn sm" style="background:rgba(34,211,154,.18);color:var(--green)" data-resolve="${id}" data-r="yes">È successo</button><button class="btn sm danger" data-resolve="${id}" data-r="no">Non è successo</button><button class="btn ghost sm" data-resolve="${id}" data-r="void">Annulla</button></div>`:""}`;
+  else body=`<div><span class="res ${st==="yes"?"y":st==="no"?"n":"v"}">${st==="yes"?"Sì":st==="no"?"No":"Annullato"}</span> <span class="note">deciso da ${esc(nm(e.resolvedBy))}${e.resolvedAt?" · "+when(e.resolvedAt):""}</span>
+    ${S.canEdit?` <button class="btn ghost sm" data-reopen="${id}">Correggi</button>`:""}</div>`;
+  const mine=[xy?`Sì: ${fmt(xy.sh)} quote`:"",xn?`No: ${fmt(xn.sh)} quote`:""].filter(Boolean).join(" · ");
+  return `<article class="glass ev-card${feat?" feat":""}" style="--d:${(i||0)*40}ms">
+    <div class="ev-top">${feat?`<span class="feat-tag">Sfida del giorno</span>`:`<span>di ${esc(nm(e.by))}</span>`}<span class="clock${st==="open"&&e.closeAt-Date.now()<36e5?" late":""}">${st==="open"?closesIn(e):st==="pending"?"da decidere":""}</span></div>
+    <div class="ev-q">${esc(e.q)}</div>${body}
+    <div class="ev-foot"><span>Volume ${fmt(evVolume(id))} cr</span>${mine?`<span class="mypos">${mine}</span>`:""}${S.canEdit&&st==="open"?`<button class="iconbtn" data-delev="${id}" aria-label="Elimina evento">${ICON.trash}</button>`:""}</div></article>`}
+function vEventi(){
+  const all=Object.entries(S.events);
+  const open=all.filter(([id,e])=>evState(e)==="open").sort((a,b)=>(b[1].feat-a[1].feat)||a[1].closeAt-b[1].closeAt);
+  const pend=all.filter(([id,e])=>evState(e)==="pending").sort((a,b)=>a[1].closeAt-b[1].closeAt);
+  const done=all.filter(([id,e])=>["yes","no","void"].includes(evState(e))).sort((a,b)=>(b[1].resolvedAt||0)-(a[1].resolvedAt||0)).slice(0,15);
+  let out=`<div class="fab"><button class="btn primary" data-sheet="newEvent">+ Nuovo evento</button></div>`;
+  if(!all.length)return out+empty("Nessun evento","Lancia la prima scommessa del giorno: \"Oggi si rompe la macchina dei gelati?\" e tutti puntano su Sì o No.");
+  if(open.length)out+=open.map(([id,e],i)=>evCard(id,e,i)).join("");else out+=empty("Niente di aperto","Crea un evento che si chiude oggi.");
+  if(pend.length)out+=`<div class="sec-h"><h2>Da decidere</h2><span>${pend.length}</span></div>`+pend.map(([id,e])=>evCard(id,e)).join("");
+  if(done.length)out+=`<div class="sec-h"><h2>Conclusi</h2><span>ultimi ${done.length}</span></div>`+done.map(([id,e])=>evCard(id,e)).join("");
+  return out;
+}
+
 function vClassifica(){
-  const ids=new Set([...Object.keys(S.bets),...Object.keys(S.names)].filter(u=>!S.banned[u]&&(S.names[u]||S.bets[u])));
+  const ids=new Set([...Object.keys(S.pos),...Object.keys(S.names)].filter(u=>!S.banned[u]&&S.names[u]));
   if(!ids.size)return empty("Nessun giocatore","La classifica appare alla prima registrazione.");
-  const rows=[...ids].map(u=>({u,...walletOf(u)})).sort((a,b)=>b.saldo-a.saldo);
-  const top=rows.slice(0,3);
-  const pod=[top[1],top[0],top[2]].map((r,k)=>r?`<div class="pod p${[2,1,3][k]}"><span class="ava" style="--h:${hue(nm(r.u))}">${ini(nm(r.u))}</span><span class="n">${esc(nm(r.u))}</span><span class="s">${fmt(r.saldo)}</span><div class="blk">${[2,1,3][k]}</div></div>`:`<div></div>`).join("");
+  const rows=[...ids].map(u=>({u,...walletOf(u)})).sort((a,b)=>b.tot-a.tot);const top=rows.slice(0,3);
+  const pod=[top[1],top[0],top[2]].map((r,k)=>r?`<div class="pod p${[2,1,3][k]}"><span class="ava" style="--h:${hue(nm(r.u))}">${ini(nm(r.u))}</span><span class="n">${esc(nm(r.u))}</span><span class="s">${fmt(r.tot)}</span><div class="blk">${[2,1,3][k]}</div></div>`:`<div></div>`).join("");
   return `<section class="glass" style="overflow:hidden"><div class="podium">${pod}</div></section>
-  <div class="sec-h"><h2>Classifica</h2><span>${rows.length} giocatori</span></div>
+  <div class="sec-h"><h2>Classifica</h2><span>per patrimonio</span></div>
   <section class="glass lb">${rows.map((r,i)=>`<div class="it${r.u===S.me?" you":""}">
     <span class="pos">${["🥇","🥈","🥉"][i]||i+1}</span><span class="mini" style="--h:${hue(nm(r.u))}">${ini(nm(r.u))}</span>
-    <span class="nm">${esc(nm(r.u))}${r.u===S.me?" (tu)":""}<small>in gioco ${fmt(r.gioco)} · vinti ${fmt(r.vinti)}</small></span>
-    <span class="sal">${fmt(r.saldo)}</span>
-    ${S.canEdit&&r.u!==S.me?`<button class="iconbtn" data-kick="${r.u}" aria-label="Elimina giocatore">${ICON.trash}</button>`:"<span></span>"}
-  </div>`).join("")}</section>
-  ${S.canEdit?`<p class="note" style="text-align:center">Da admin puoi eliminare un giocatore col cestino: sparisce dalla classifica, le sue puntate vengono annullate e non può più rientrare con quel soprannome.</p>`:""}`;
+    <span class="nm">${esc(nm(r.u))}${r.u===S.me?" (tu)":""}<small>disponibili ${fmt(r.avail)} · in gioco ${fmt(r.gioco)}</small></span>
+    <span class="sal">${fmt(r.tot)}</span>
+    ${S.canEdit&&r.u!==S.me?`<button class="iconbtn" data-kick="${r.u}" aria-label="Elimina giocatore">${ICON.trash}</button>`:"<span></span>"}</div>`).join("")}</section>
+  ${S.canEdit?`<p class="note" style="text-align:center">Da admin puoi eliminare un giocatore col cestino: sparisce dalla classifica, le sue quote vengono annullate e non può più rientrare con quel soprannome.</p>`:""}`;
 }
-function vMovimenti(){
-  const ev=[];for(const u in S.bets)for(const l of (S.bets[u].log||[]))ev.push({...l,u});
-  for(const pid in S.esiti)ev.push({fired:true,pid,at:S.esiti[pid].at,quota:S.esiti[pid].quota});
-  ev.sort((a,b)=>b.at-a.at);
-  if(!ev.length)return empty("Tutto fermo","Qui compaiono puntate ed esiti, dal più recente.");
-  const pn=id=>(S.players.find(p=>p.id===id)||{}).name||"(nome rimosso)";
-  return `<section class="glass tl">${ev.slice(0,80).map(e=>`<div class="ev${e.fired?" f":""}"><span class="dot">${e.fired?ICON.fire:ICON.bet}</span>
-    <p>${e.fired?`<b>${esc(pn(e.pid))}</b> è stato licenziato · pagato a ${fq(e.quota)}`:`<b>${esc(nm(e.u))}</b> punta <b class="num">${fmt(e.amount)}</b> su <b>${esc(pn(e.pid))}</b>`}</p><time>${when(e.at)}</time></div>`).join("")}</section>`;
-}
-function vRosa(){
-  return `<form class="glass form" id="addForm">
-    <h3>Aggiungi un candidato</h3>
-    <div class="fields"><input type="text" id="pName" placeholder="Nome o soprannome" maxlength="40" required><input type="text" id="pRep" placeholder="Reparto" maxlength="30"><button class="btn primary" type="submit">Aggiungi</button></div>
-    <span class="note">Va bene anche un soprannome. Ogni nuovo candidato parte con lo stesso rischio degli altri.</span>
-  </form>
-  ${S.players.length?`<div class="sec-h"><h2>Candidati</h2><span>${S.players.length}</span></div><section class="glass">${S.players.map(p=>`<div class="cand">
-    <span class="mini" style="--h:${hue(p.name)}">${ini(p.name)}</span><span><b>${esc(p.name)}</b><small>${esc(p.reparto||"—")}${S.esiti[p.id]?" · licenziato":""}</small></span>
-    ${S.canEdit?`<button class="iconbtn" data-del="${p.id}" aria-label="Rimuovi candidato">${ICON.trash}</button>`:"<span></span>"}</div>`).join("")}</section>`:""}`;
+function keyLabel(k){const p=parseKey(k);if(p.t==="c")return (S.players.find(x=>x.id===p.id)||{}).name||"(candidato rimosso)";const e=S.events[p.id];return (e?e.q:"(evento rimosso)")+" · "+(p.side==="Y"?"Sì":"No")}
+function vAttivita(){
+  const ev=[];for(const u in S.pos)for(const l of (S.pos[u].log||[]))ev.push({...l,u});
+  for(const pid in S.esiti)ev.push({t:"f",pid,at:S.esiti[pid].at});
+  for(const id in S.events){const e=S.events[id];ev.push({t:"n",id,u:e.by,at:e.at});if(e.resolvedAt)ev.push({t:"r",id,at:e.resolvedAt,st:e.status,u:e.resolvedBy})}
+  ev.sort((a,b)=>b.at-a.at);if(!ev.length)return empty("Tutto fermo","Qui compaiono puntate, vendite ed esiti, dal più recente.");
+  const pn=id=>(S.players.find(p=>p.id===id)||{}).name||"(nome rimosso)",eq=id=>(S.events[id]||{}).q||"(evento rimosso)";
+  return `<section class="glass tl">${ev.slice(0,90).map(e=>{let ic=ICON.buy,cls="",txt="";
+    if(e.t==="b")txt=`<b>${esc(nm(e.u))}</b> compra <b class="num">${fmt(e.a)}</b> cr su <b>${esc(keyLabel(e.k))}</b>`;
+    else if(e.t==="s"){ic=ICON.sell;txt=`<b>${esc(nm(e.u))}</b> vende e incassa <b class="num">${fmt(e.a)}</b> cr da <b>${esc(keyLabel(e.k))}</b>`}
+    else if(e.t==="f"){ic=ICON.fire;cls=" f";txt=`<b>${esc(pn(e.pid))}</b> è stato licenziato`}
+    else if(e.t==="n"){ic=ICON.ev;txt=`<b>${esc(nm(e.u))}</b> lancia: <b>${esc(eq(e.id))}</b>`}
+    else {ic=ICON.ok;txt=`Esito <b>${e.st==="yes"?"Sì":e.st==="no"?"No":"annullato"}</b> per <b>${esc(eq(e.id))}</b>`}
+    return `<div class="ev${cls}"><span class="dot">${ic}</span><p>${txt}</p><time>${when(e.at)}</time></div>`}).join("")}</section>`;
 }
 const ANON=["Muletto","Tornio","Calibro","Bava","Truciolo","Morsa","Brugola","Pistone","Guarnizione","Valvola","Raccordo","Flangia"];
 function anonName(id){let h=0;for(const c of id)h=(h*31+c.charCodeAt(0))>>>0;return "Anonimo "+ANON[h%ANON.length]}
@@ -520,204 +588,193 @@ function vBacheca(){
   const opts=S.players.filter(p=>!S.esiti[p.id]).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
   const liked=ls("fl_laughs")||{};const pn=id=>(S.players.find(p=>p.id===id)||{}).name;
   const posts=[...S.posts].sort((a,b)=>b.at-a.at).slice(0,100);
-  return `<form class="glass form" id="postForm">
-    <h3>Voci di corridoio</h3>
+  return `<form class="glass form" id="postForm"><h3>Voci di corridoio</h3>
     <textarea id="pText" maxlength="280" placeholder="Cosa sta succedendo in reparto?" required></textarea>
     <div class="composer-row"><select id="pAbout" aria-label="Riguarda"><option value="">Riguarda: nessuno in particolare</option>${opts}</select>
       <span class="note" id="pCount">0/280</span><button class="btn blue" type="submit">Pubblica anonimo</button></div>
-    <span class="note">Gli altri vedono solo "Anonimo". L'admin può risalire all'autore e cancellare i messaggi fuori luogo.</span>
-  </form>
+    <span class="note">Gli altri vedono solo "Anonimo". L'admin può risalire all'autore e cancellare i messaggi fuori luogo.</span></form>
   ${posts.length?posts.map(x=>{const mine=S.myPosts.has(x.id),who=S.canEdit&&S.authors[x.id]?S.names[S.authors[x.id]]||"?":null,an=anonName(x.id);
     return `<article class="glass post"><div class="pmeta"><span class="anon"><span class="mini" style="--h:${hue(an)}">${an.split(" ")[1][0]}</span>${an}</span>${x.pid&&pn(x.pid)?`<span class="chip">su ${esc(pn(x.pid))}</span>`:""}</div>
-      <p>${esc(x.text)}</p>
-      <div class="pmeta"><time class="num">${when(x.at)}</time><span class="acts">${who?`<span class="admin-who">di ${esc(who)} · solo tu</span>`:""}${mine||S.canEdit?`<button class="iconbtn" data-delpost="${x.id}" aria-label="Elimina messaggio">${ICON.trash}</button>`:""}
+      <p>${esc(x.text)}</p><div class="pmeta"><time class="num">${when(x.at)}</time><span class="acts">${who?`<span class="admin-who">di ${esc(who)} · solo tu</span>`:""}${mine||S.canEdit?`<button class="iconbtn" data-delpost="${x.id}" aria-label="Elimina messaggio">${ICON.trash}</button>`:""}
       <button class="laugh" data-laugh="${x.id}" aria-pressed="${!!liked[x.id]}">😂 ${x.risate||0}</button></span></div></article>`}).join("")
   :empty("Bacheca vuota","Scrivi la prima voce di corridoio.")}`;
 }
 
-/* ---------- sheet puntata ---------- */
-function vSheet(){
-  if(!S.open)return"";const p=S.players.find(x=>x.id===S.open);const m=market();if(!p||!m[p.id]||m[p.id].fired){S.open=null;return""}
-  const x=m[p.id],saldo=Math.floor(walletOf(S.me).saldo),n=S.players.filter(q=>!m[q.id].fired).length,lv=level(x.pct,n),mine=((S.bets[S.me]||{}).stakes||{})[p.id]||0;
-  return `<div class="scrim" data-close="1"></div><section class="sheet" role="dialog" aria-label="Punta su ${esc(p.name)}">
-    <div class="grab"></div>
-    <div class="sh-head"><span class="ava xl" style="--h:${hue(p.name)}">${ini(p.name)}</span>
-      <div style="min-width:0"><h3>${esc(p.name)}</h3><p>${p.reparto?esc(p.reparto)+" · ":""}<span style="color:${lv.c};font-weight:700">Rischio ${lv.t.toLowerCase()}</span>${mine?` · tuoi <b style="color:var(--oil2)">${fmt(mine)}</b>`:""}</p></div>
-      <button class="close" data-close="1" aria-label="Chiudi">✕</button></div>
-    ${saldo<1?`<p class="warn">Non hai più crediti da puntare. Aspetta il prossimo licenziamento per incassare.</p>`:`
-    <div class="amount"><span class="label">Quanto punti</span><div class="v"><span id="amtV">${Math.min(50,saldo)}</span><small>cr</small></div>
-      <input type="range" id="amt" min="1" max="${saldo}" step="1" value="${Math.min(50,saldo)}" aria-label="Crediti da puntare"></div>
-    <div class="chips">${[10,50,100,250].map(v=>`<button data-chip="${v}">+${v}</button>`).join("")}<button data-chip="all">Max</button></div>
-    <div class="compare"><div><span class="label">Rischio ora</span><b>${f1(x.pct*100)}%</b></div><span class="arrow">→</span><div><span class="label">Dopo</span><b id="pvPct" style="color:var(--red)">—</b></div></div>
-    <div class="payout"><span>Se viene licenziato incassi</span><b id="pvWin">—</b></div>
-    <button class="btn primary wide" data-bet="${p.id}" style="font-size:17px;padding:16px">Conferma puntata</button>`}
-    ${S.canEdit?`<button class="btn danger wide" data-fire="${p.id}">Segna come licenziato</button>`:""}
-  </section>`;
+/* ================= sheet ================= */
+function vSheet(){const sh=S.sheet;if(!sh)return"";
+  const wrap=(inner,label)=>`<div class="scrim" data-close="1"></div><section class="sheet" role="dialog" aria-label="${label}"><div class="grab"></div>${inner}</section>`;
+  if(sh.type==="guide"){const G=(t,b)=>`<details class="gd"${t.startsWith("1")?" open":""}><summary>${t}</summary><div>${b}</div></details>`;
+    return wrap(`<div class="sh-head" style="grid-template-columns:minmax(0,1fr) auto"><div><h3>Come si gioca</h3><p>Tutto quello che c'è da sapere in 2 minuti.</p></div><button class="close" data-close="1" aria-label="Chiudi">✕</button></div>
+    <div class="guide">
+    ${G("1 · L'idea","<p>È un mercato di pronostici con <b>crediti finti</b>: nessun soldo vero, nessun premio. Ognuno parte con <b>1000 crediti</b>. Vince chi ha il patrimonio più alto.</p>")}
+    ${G("2 · Le quote: come funziona una puntata","<p>Quando punti non compri un risultato secco ma delle <b>quote</b>. Il prezzo di una quota è la probabilità del momento: se il Sì è al 25%, una quota costa circa 0,25 crediti.</p><p>Se alla fine <b>hai ragione</b>, ogni quota vale <b>1 credito</b>. Se hai torto vale 0.</p><p>Esempio: punti 100 crediti sul Sì al 25% e ricevi circa 400 quote. Se succede, incassi circa 400 crediti.</p><p>Più gente punta su una cosa, più il suo prezzo sale e meno paga: è il gruppo a fare le quote.</p>")}
+    ${G("3 · Mercato: rischio licenziamento","<p>Ogni candidato ha una percentuale di <b>rischio licenziamento</b> che sale quando ci puntano sopra. Il livello va da Basso a Critico, e il primo della lista è il <b>Favorito</b>.</p><p>Tocca un nome per comprare quote. Se l'admin lo segna come <b>licenziato</b>, le sue quote pagano 1 credito l'una. Se un candidato viene tolto dalla lista, chi aveva quote riceve indietro i crediti spesi.</p><p>In fondo alla pagina puoi <b>aggiungere un candidato</b>.</p>")}
+    ${G("4 · Eventi Sì / No","<p>Chiunque può lanciare un evento con <b>+ Nuovo evento</b>, ad esempio <i>Oggi si rompe la macchina dei gelati?</i> Scegli quando chiude: tra un'ora, a fine giornata, domani sera o a un'ora precisa.</p><p>Finché è aperto tutti possono comprare quote del <b>Sì</b> o del <b>No</b>. La barra verde e rossa mostra cosa pensa il gruppo.</p><p>Dopo la chiusura, chi l'ha creato (o l'admin) decide l'esito: <b>È successo</b>, <b>Non è successo</b> oppure <b>Annulla</b>, che restituisce i crediti a tutti. Chi ha deciso resta scritto, e l'admin può correggere.</p><p>La <b>Sfida del giorno</b> è l'evento che l'admin mette in evidenza in cima.</p>")}
+    ${G("5 · Vendere e ritirare","<p>Hai cambiato idea o il prezzo è salito? Riapri la puntata: vedi quante quote hai, quanto le hai pagate e quanto valgono adesso.</p><p><b>Vendi metà</b> o <b>Ritira tutto</b> ti restituiscono il valore del momento, meno una commissione del 2%. Se il prezzo è salito ci guadagni, se è sceso ci perdi. Si può vendere solo finché il mercato è aperto.</p>")}
+    ${G("6 · Il tuo saldo","<p><b>Crediti disponibili</b>: quelli che puoi puntare adesso, comprese le vincite già incassate.</p><p><b>In gioco</b>: quanto valgono ora le tue quote su mercati ancora aperti.</p><p><b>Patrimonio</b>: la somma delle due. È quello che conta in classifica.</p><p>Il <b>manometro</b> misura quanti crediti sono in gioco in tutto il reparto: più sale, più il mercato è caldo.</p>")}
+    ${G("7 · Classifica, bacheca e attività","<p><b>Classifica</b>: podio e graduatoria per patrimonio.</p><p><b>Bacheca</b>: voci di corridoio <b>anonime</b>, con reazioni 😂. Gli altri vedono solo un nome tipo <i>Anonimo Valvola</i>. L'admin però può vedere chi ha scritto e cancellare i messaggi fuori luogo.</p><p><b>Attività</b>: tutte le puntate, le vendite, gli eventi e gli esiti, dal più recente.</p>")}
+    ${G("8 · Regole del gioco","<p>Niente soldi veri e niente premi in denaro. Rispetto per tutti: niente offese, niente cose personali o private. In caso di dubbio decide l'admin, che può eliminare eventi, messaggi e giocatori.</p>")}
+    ${S.canEdit?G("9 · Solo per l'admin","<p>Puoi segnare un candidato come <b>licenziato</b> dal suo pannello, e annullare l'esito dalla lista \"Già saltati\". Puoi eliminare candidati, eventi e messaggi, decidere o correggere l'esito di qualsiasi evento e mettere un evento come <b>Sfida del giorno</b>. In Classifica il cestino <b>elimina un giocatore</b>: le sue quote vengono annullate e non può più rientrare con quel soprannome.</p>"):""}
+    ${G("10 · Installarla sul telefono","<p><b>iPhone</b>: apri il link con Safari → tasto Condividi → <i>Aggiungi alla schermata Home</i>.</p><p><b>Android</b>: apri il link con Chrome → menu ⋮ → <i>Installa app</i>.</p>")}
+    </div><button class="btn primary wide" data-close="1">Ho capito, si gioca</button>`,"Come si gioca")}
+  if(sh.type==="addCand")return wrap(`<div class="sh-head" style="grid-template-columns:minmax(0,1fr) auto"><div><h3>Nuovo candidato</h3><p>Entra nel mercato con lo stesso rischio degli altri.</p></div><button class="close" data-close="1" aria-label="Chiudi">✕</button></div>
+    <form id="addForm" style="display:flex;flex-direction:column;gap:10px"><input type="text" id="pName" placeholder="Nome o soprannome" maxlength="40" required><input type="text" id="pRep" placeholder="Reparto (facoltativo)" maxlength="30"><button class="btn primary wide" type="submit">Aggiungi</button></form>`,"Nuovo candidato");
+  if(sh.type==="newEvent"){const c=sh.close||"oggi";return wrap(`<div class="sh-head" style="grid-template-columns:minmax(0,1fr) auto"><div><h3>Nuovo evento</h3><p>Una domanda Sì/No. Tutti possono puntare finché non chiude.</p></div><button class="close" data-close="1" aria-label="Chiudi">✕</button></div>
+    <form id="evForm" style="display:flex;flex-direction:column;gap:12px">
+      <textarea id="eQ" maxlength="120" placeholder="Oggi si rompe la macchina dei gelati?" required style="min-height:70px"></textarea>
+      <span class="label">Quando chiude</span>
+      <div class="seg">${[["1h","Tra 1 ora"],["oggi","Fine giornata"],["domani","Domani sera"],["ora","Scegli ora"]].map(([v,l])=>`<button type="button" data-close-at="${v}" aria-pressed="${c===v}">${l}</button>`).join("")}</div>
+      ${c==="ora"?`<input type="time" id="eTime" value="17:00" aria-label="Ora di chiusura (oggi o domani se già passata)">`:""}
+      ${S.canEdit?`<label class="check"><input type="checkbox" id="eFeat"> Metti come Sfida del giorno</label>`:""}
+      <p class="note" style="margin:0">L'esito lo decidi tu (o l'admin) dopo la chiusura, e tutti vedono chi l'ha deciso.</p>
+      <button class="btn primary wide" type="submit">Lancia l'evento</button></form>`,"Nuovo evento")}
+  if(sh.type==="bet"){const k=sh.k,p=parseKey(k);if(!isOpen(k)){S.sheet=null;return""}
+    let title,sub,avatar,sideTabs="";
+    if(p.t==="c"){const pl=S.players.find(x=>x.id===p.id);const lv=level(candPrice(p.id),activeCands().length);
+      title=esc(pl.name);sub=`${pl.reparto?esc(pl.reparto)+" · ":""}<span style="color:${lv.c};font-weight:700">Rischio ${lv.t.toLowerCase()}</span>`;avatar=`<span class="ava xl" style="--h:${hue(pl.name)}">${ini(pl.name)}</span>`}
+    else{const e=S.events[p.id];title=esc(e.q);sub=closesIn(e);avatar=`<span class="ava xl" style="--h:${p.side==="Y"?150:355}">${p.side==="Y"?"SÌ":"NO"}</span>`;
+      sideTabs=`<div class="side-tabs"><button class="y${p.side==="Y"?" on":""}" data-bet="${evKey(p.id,"Y")}">Sì ${f1(evPrice(p.id,"Y")*100)}%</button><button class="n${p.side==="N"?" on":""}" data-bet="${evKey(p.id,"N")}">No ${f1(evPrice(p.id,"N")*100)}%</button></div>`}
+    const w=walletOf(S.me),max=Math.floor(w.avail),x=myPos(k),pr=priceOf(k);
+    let posBox="";if(x){const qh=quoteSell(k,.5),qa=quoteSell(k,1),val=qa.got,g=val-x.cost;
+      posBox=`<div class="pos-box"><div class="r"><span>Le tue quote</span><b>${fmt(x.sh)}</b></div><div class="r"><span>Pagate</span><b>${fmt(x.cost)} cr</b></div>
+        <div class="r"><span>Se ritiri ora</span><b class="${g>=0?"gain":"loss"}">${fmt(val)} cr (${g>=0?"+":""}${fmt(g)})</b></div><div class="r"><span>Se vinci</span><b style="color:var(--oil2)">${fmt(x.sh)} cr</b></div>
+        <div class="sell"><button class="btn ghost" data-sell="${k}" data-f=".5">Vendi metà · ${fmt(qh.got)}</button><button class="btn danger" data-sell="${k}" data-f="1">Ritira tutto · ${fmt(qa.got)}</button></div></div>`}
+    return wrap(`<div class="sh-head">${avatar}<div style="min-width:0"><h3 style="${p.t==="e"?"font-size:22px;text-transform:none":""}">${title}</h3><p>${sub}</p></div><button class="close" data-close="1" aria-label="Chiudi">✕</button></div>
+      ${sideTabs}${posBox}
+      ${max<1?`<p class="warn">Non hai crediti disponibili. Vendi qualche quota o aspetta un esito.</p>`:`
+      <div class="amount"><span class="label">${x?"Compra ancora":"Quanto punti"}</span><div class="v"><span id="amtV">${Math.min(50,max)}</span><small>cr</small></div>
+        <input type="range" id="amt" min="1" max="${max}" step="1" value="${Math.min(50,max)}" aria-label="Crediti da puntare"></div>
+      <div class="chips">${[10,50,100,250].map(v=>`<button data-chip="${v}">+${v}</button>`).join("")}<button data-chip="all">Max</button></div>
+      <div class="compare"><div><span class="label">${p.t==="c"?"Rischio ora":"Prezzo ora"}</span><b>${f1(pr*100)}%</b></div><span class="arrow">→</span><div><span class="label">Dopo</span><b id="pvPct" style="color:var(--red)">—</b></div></div>
+      <div class="payout"><span>Ricevi <b id="pvSh" style="font-size:16px;color:var(--ink)">—</b> quote · se hai ragione incassi</span><b id="pvWin">—</b></div>
+      <button class="btn primary wide" data-buy="${k}" style="font-size:17px;padding:16px">Conferma</button>`}
+      ${p.t==="c"&&S.canEdit?`<button class="btn danger wide" data-fire="${p.id}">Segna come licenziato</button>`:""}`,"Puntata")}
+  return"";
 }
-function updPreview(){
-  const inp=$("#amt");if(!inp)return;
-  const a=Math.floor(+inp.value||0),st=stakesOn(),act=S.players.filter(p=>!S.esiti[p.id]);
-  const tot=act.reduce((s,p)=>s+BASE+(st[p.id]||0),0)+a,np=(BASE+(st[S.open]||0)+a)/tot,nq=Math.max(1.05,1/np);
-  $("#amtV").textContent=fmt(a);$("#pvPct").textContent=f1(np*100)+"%";$("#pvWin").textContent=fmt(a*nq)+" cr";
-  inp.style.setProperty("--fill",((a-1)/Math.max(1,+inp.max-1)*100)+"%");
-}
+function updPreview(){const inp=$("#amt");if(!inp||!S.sheet||S.sheet.type!=="bet")return;const a=Math.floor(+inp.value||0),k=S.sheet.k,q=quoteBuy(k,a);
+  $("#amtV").textContent=fmt(a);$("#pvPct").textContent=f1(q.p1*100)+"%";$("#pvSh").textContent=fmt(q.sh);$("#pvWin").textContent=fmt(q.sh)+" cr";
+  inp.style.setProperty("--fill",((a-1)/Math.max(1,+inp.max-1)*100)+"%")}
 
-/* ---------- render ---------- */
-function render(){
-  if(!S.me)return;
-  head();
+/* ================= render ================= */
+function render(){if(!S.me)return;head();
   document.querySelectorAll(".nav button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===S.tab));
   const keep={},fid=document.activeElement&&document.activeElement.id;
-  document.querySelectorAll("#view [id],#sheet [id]").forEach(el=>{if("value" in el&&el.tagName!=="BUTTON")keep[el.id]=el.value});
-  $("#view").innerHTML=S.ready?{mercato:vMercato,classifica:vClassifica,movimenti:vMovimenti,rosa:vRosa,bacheca:vBacheca}[S.tab]()
-    :`<div class="glass empty"><h3>Collegamento…</h3><p>Sto leggendo candidati e puntate.</p></div>`;
-  const sh=vSheet();if($("#sheet").dataset.for!==String(S.open)||!sh){$("#sheet").innerHTML=sh;$("#sheet").dataset.for=String(S.open)}
+  document.querySelectorAll("#view [id],#sheet [id]").forEach(el=>{if("value" in el&&el.tagName!=="BUTTON"&&el.type!=="checkbox")keep[el.id]=el.value});
+  $("#view").innerHTML=S.ready?{mercato:vMercato,eventi:vEventi,classifica:vClassifica,bacheca:vBacheca,attivita:vAttivita}[S.tab]()
+    :`<div class="glass empty"><h3>Collegamento…</h3><p>Sto leggendo il mercato.</p></div>`;
+  const sig=JSON.stringify(S.sheet)+"|"+(S.sheet&&S.sheet.k?JSON.stringify(myPos(S.sheet.k))+walletOf(S.me).avail.toFixed(2):"");
+  if($("#sheet").dataset.sig!==sig){$("#sheet").innerHTML=vSheet();$("#sheet").dataset.sig=sig}
   for(const id in keep){const el=document.getElementById(id);if(el&&"value" in el)el.value=keep[id]}
   if(fid){const el=document.getElementById(fid);if(el&&(el.closest("#view")||el.closest("#sheet")))el.focus()}
   const pc=$("#pCount"),pt=$("#pText");if(pc&&pt)pc.textContent=pt.value.length+"/280";
-  document.body.style.overflow=S.open?"hidden":"";
-  updPreview();
-}
+  document.body.style.overflow=S.sheet?"hidden":"";updPreview()}
 
-/* ---------- overlay licenziato ---------- */
-function checkBoom(){
-  const last=ls("fl_lastvisit");const seen=ls("fl_seen")||{};
-  if(last==null){const s={};for(const id in S.esiti)s[id]=1;ls("fl_seen",s);ls("fl_lastvisit",Date.now());return}
-  const nw=Object.keys(S.esiti).filter(id=>!seen[id]);if(!nw.length)return;
-  const id=nw[0];seen[id]=1;ls("fl_seen",seen);
-  const p=S.players.find(x=>x.id===id);if(!p)return;
-  const st=((S.bets[S.me]||{}).stakes||{})[id]||0,won=st*S.esiti[id].quota;
-  $("#boom").innerHTML=`<div class="boom" data-boom="1"><div class="in">
-    <span class="ava xl" style="--h:${hue(p.name)};filter:grayscale(.6)">${ini(p.name)}</span>
-    <div class="big">Licenziato</div><h3>${esc(p.name)}</h3>
-    ${st?`<p>Ci avevi puntato <b>${fmt(st)}</b> crediti</p><div class="won">+${fmt(won)} cr</div>`:`<p>Pagato a quota ${fq(S.esiti[id].quota)}. Tu non ci avevi puntato.</p>`}
-    <button class="btn primary" data-boom="1" style="margin-top:8px">Avanti</button></div></div>`;
-  if(st)confetti();
-}
-function confetti(){
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const c=$("#confetti"),x=c.getContext("2d");c.hidden=false;c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;x.scale(devicePixelRatio,devicePixelRatio);
+/* ================= overlay esiti ================= */
+function checkBoom(){const last=ls("fl_lastvisit");const seen=ls("fl_seen2")||{};
+  const keys=[...Object.keys(S.esiti).map(id=>"c_"+id),...Object.entries(S.events).filter(([i,e])=>["yes","no"].includes(e.status)).map(([i,e])=>"e_"+i+"_"+e.status)];
+  if(last==null||!ls("fl_seen2")){const s={};keys.forEach(k=>s[k]=1);ls("fl_seen2",s);ls("fl_lastvisit",Date.now());return}
+  const nw=keys.filter(k=>!seen[k]);if(!nw.length)return;const k=nw[0];seen[k]=1;ls("fl_seen2",seen);
+  if(k.startsWith("c_")){const id=k.slice(2),p=S.players.find(x=>x.id===id);if(!p)return checkBoom();const x=myPos(candKey(id));
+    $("#boom").innerHTML=`<div class="boom" data-boom="1"><div class="in"><span class="ava xl" style="--h:${hue(p.name)};filter:grayscale(.6)">${ini(p.name)}</span>
+      <div class="big">Licenziato</div><h3>${esc(p.name)}</h3>${x?`<p>Avevi ${fmt(x.sh)} quote</p><div class="won">+${fmt(x.sh)} cr</div>`:`<p>Tu non ci avevi puntato.</p>`}
+      <button class="btn primary" data-boom="1" style="margin-top:8px">Avanti</button></div></div>`;if(x)confetti();return}
+  const m=k.match(/^e_(.+)_(yes|no)$/),id=m[1],res=m[2],e=S.events[id];const win=myPos(evKey(id,res==="yes"?"Y":"N")),lose=myPos(evKey(id,res==="yes"?"N":"Y"));
+  if(!win&&!lose)return checkBoom();
+  $("#boom").innerHTML=`<div class="boom" data-boom="1" style="${res==="yes"?"background:radial-gradient(circle at 50% 45%,rgba(10,80,60,.96),rgba(4,8,18,.98) 70%)":""}"><div class="in">
+    <div class="big" style="${res==="yes"?"color:var(--green);border-color:var(--green);text-shadow:0 0 30px rgba(34,211,154,.6)":""}">${res==="yes"?"Sì!":"No!"}</div><h3 style="text-transform:none;font-size:26px">${esc(e.q)}</h3>
+    ${win?`<p>Avevi ragione</p><div class="won">+${fmt(win.sh)} cr</div>`:`<p>Questa volta è andata male: le tue quote valgono 0.</p>`}
+    <button class="btn primary" data-boom="1" style="margin-top:8px">Avanti</button></div></div>`;if(win)confetti()}
+function confetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const c=$("#confetti"),x=c.getContext("2d");c.hidden=false;c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
   const col=["#ffa31a","#3d8bff","#ffd23f","#22d39a","#ff4d5e","#ffffff"];
   const P=Array.from({length:140},()=>({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*14,vy:-Math.random()*14-4,r:Math.random()*6+3,c:col[Math.random()*col.length|0],a:Math.random()*6,va:(Math.random()-.5)*.3}));
   const t0=performance.now();(function f(t){x.clearRect(0,0,innerWidth,innerHeight);
     for(const p of P){p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a+=p.va;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);x.restore()}
-    if(t-t0<2600)requestAnimationFrame(f);else c.hidden=true})(t0);
-}
+    if(t-t0<2600)requestAnimationFrame(f);else c.hidden=true})(t0)}
 
-/* ---------- azioni ---------- */
-async function bet(pid){
-  const a=Math.floor(+$("#amt").value||0);const saldo=walletOf(S.me).saldo;
-  if(a<1)return toast("Inserisci almeno 1 credito.");
-  if(a>saldo)return toast("Saldo insufficiente.");
-  if(S.esiti[pid])return toast("Mercato chiuso su questo nome.");
-  const cur=S.bets[S.me]||{stakes:{},log:[]};
-  const stakes={...(cur.stakes||{}),[pid]:((cur.stakes||{})[pid]||0)+a};
-  const log=[...(cur.log||[]),{pid,amount:a,at:Date.now()}].slice(-200);
-  try{await S.db.collection("bets").doc(S.me).set({stakes,log});S.open=null;render();toast(`Puntati ${a} crediti.`)}catch(e){toast("Puntata non salvata: controlla la connessione.")}
-}
-async function fire(pid){
-  const q=market()[pid].q;
-  try{await S.db.collection("esiti").doc(pid).set({quota:Math.round(q*100)/100,at:Date.now()});S.open=null;render();toast("Esito registrato, vincite pagate.")}catch(e){toast("Solo l'amministratore può segnare un esito.")}
-}
-async function kick(uid){
-  const b=S.db.batch();
-  b.set(S.db.collection("banned").doc(uid),{at:Date.now(),nick:S.names[uid]||""});
-  b.delete(S.db.collection("bets").doc(uid));b.delete(S.db.collection("users").doc(uid));
-  try{await b.commit();toast("Giocatore eliminato.")}catch(e){toast("Non riesco a eliminarlo: hai aggiornato le regole Firebase?")}
-}
-function arm(t,label){if(t.dataset.armed)return true;const html=t.innerHTML;t.dataset.armed=1;t.classList.add("armed");t.textContent=label||"Confermi?";setTimeout(()=>{if(t.isConnected){delete t.dataset.armed;t.classList.remove("armed");t.innerHTML=html;if(t.id==="logout")head()}},3500);return false}
+/* ================= azioni admin ================= */
+async function fire(pid){try{await S.db.collection("esiti").doc(pid).set({at:Date.now()});S.sheet=null;render();toast("Licenziamento registrato: le quote vincenti pagano 1 cr.")}catch(e){toast("Solo l'amministratore può farlo.")}}
+async function kick(uid){const b=S.db.batch();b.set(S.db.collection("banned").doc(uid),{at:Date.now(),nick:S.names[uid]||""});
+  b.delete(S.db.collection("pos").doc(uid));b.delete(S.db.collection("users").doc(uid));
+  try{await b.commit();toast("Giocatore eliminato.")}catch(e){toast("Non riesco a eliminarlo: hai aggiornato le regole Firebase?")}}
+async function resolveEv(id,r){try{await S.db.collection("events").doc(id).update({status:r,resolvedBy:S.me,resolvedAt:Date.now()});toast(r==="void"?"Evento annullato: crediti restituiti.":"Esito registrato.")}catch(e){toast("Puoi decidere solo i tuoi eventi.")}}
+function arm(t,label){if(t.dataset.armed)return true;const html=t.innerHTML;t.dataset.armed=1;t.classList.add("armed");t.textContent=label||"Confermi?";
+  setTimeout(()=>{if(t.isConnected){delete t.dataset.armed;t.classList.remove("armed");t.innerHTML=html;if(t.id==="logout")head()}},3500);return false}
+function closeTime(v){const d=new Date();if(v==="1h")return Date.now()+36e5;if(v==="oggi"){d.setHours(23,59,0,0);return d.getTime()}
+  if(v==="domani"){d.setDate(d.getDate()+1);d.setHours(20,0,0,0);return d.getTime()}
+  const t=($("#eTime")||{}).value||"17:00";const [h,m]=t.split(":").map(Number);d.setHours(h,m,0,0);if(d.getTime()<=Date.now()+6e4)d.setDate(d.getDate()+1);return d.getTime()}
 
 document.addEventListener("click",e=>{
   const t=e.target.closest("button,[data-close],[data-boom]");if(!t||(t.form&&t.type==="submit"))return;
   if(t.dataset.boom){$("#boom").innerHTML="";checkBoom();return}
-  if(t.dataset.close){S.open=null;render();return}
-  if(t.dataset.t){S.tab=t.dataset.t;S.open=null;render();scrollTo({top:0,behavior:"smooth"});return}
-  if(t.dataset.go){S.tab=t.dataset.go;render();return}
-  if(t.dataset.open){S.open=t.dataset.open;render();return}
+  if(t.dataset.close){S.sheet=null;render();return}
+  if(t.dataset.t){S.tab=t.dataset.t;S.sheet=null;render();scrollTo({top:0,behavior:"smooth"});return}
+  if(t.dataset.sheet){S.sheet={type:t.dataset.sheet};render();return}
+  if(t.dataset.closeAt){S.sheet={...S.sheet,close:t.dataset.closeAt};render();return}
+  if(t.dataset.bet){S.sheet={type:"bet",k:t.dataset.bet};render();return}
   if(t.dataset.chip){const inp=$("#amt");const mx=+inp.max;inp.value=t.dataset.chip==="all"?mx:Math.min(mx,(+inp.value||0)+ +t.dataset.chip);updPreview();return}
-  if(t.dataset.bet)return bet(t.dataset.bet);
+  if(t.dataset.buy)return buy(t.dataset.buy,+$("#amt").value);
+  if(t.dataset.sell){if(arm(t,"Tocca ancora per vendere"))sell(t.dataset.sell,+t.dataset.f);return}
   if(t.dataset.fire){if(arm(t,"Tocca di nuovo per confermare"))fire(t.dataset.fire);return}
   if(t.dataset.undo){S.db.collection("esiti").doc(t.dataset.undo).delete().catch(()=>toast("Non riesco ad annullare."));return}
-  if(t.dataset.del){if(arm(t,"Rimuovi?"))S.db.collection("players").doc(t.dataset.del).delete().then(()=>toast("Candidato rimosso.")).catch(()=>toast("Non riesco a rimuoverlo."));return}
+  if(t.dataset.resolve){if(arm(t,"Confermi?"))resolveEv(t.dataset.resolve,t.dataset.r);return}
+  if(t.dataset.reopen){S.db.collection("events").doc(t.dataset.reopen).update({status:"open",resolvedBy:firebase.firestore.FieldValue.delete(),resolvedAt:firebase.firestore.FieldValue.delete()}).then(()=>toast("Esito annullato: decidi di nuovo.")).catch(()=>toast("Non riesco."));return}
+  if(t.dataset.delev){if(arm(t,"Elimina?"))S.db.collection("events").doc(t.dataset.delev).delete().then(()=>toast("Evento eliminato: crediti restituiti.")).catch(()=>toast("Non riesco a eliminarlo."));return}
+  if(t.dataset.del){if(arm(t,"Rimuovi?"))S.db.collection("players").doc(t.dataset.del).delete().then(()=>toast("Candidato rimosso: chi aveva quote riceve indietro i crediti.")).catch(()=>toast("Non riesco a rimuoverlo."));return}
   if(t.dataset.kick){if(arm(t,"Elimina?"))kick(t.dataset.kick);return}
   if(t.id==="logout"){if(arm(t,"Esci?"))firebase.auth().signOut();return}
   if(t.id==="logout2"){firebase.auth().signOut();return}
-  if(t.dataset.laugh){const id=t.dataset.laugh,liked=ls("fl_laughs")||{};if(liked[id])return;
-    const x=S.posts.find(p=>p.id===id);if(!x)return;liked[id]=1;ls("fl_laughs",liked);
+  if(t.dataset.laugh){const id=t.dataset.laugh,liked=ls("fl_laughs")||{};if(liked[id])return;const x=S.posts.find(p=>p.id===id);if(!x)return;liked[id]=1;ls("fl_laughs",liked);
     S.db.collection("bacheca").doc(id).update({risate:(x.risate||0)+1}).catch(()=>{});return}
-  if(t.dataset.delpost){if(!arm(t,"Elimina?"))return;const id=t.dataset.delpost;
-    const b=S.db.batch();b.delete(S.db.collection("bacheca").doc(id));b.delete(S.db.collection("bacheca_autori").doc(id));
+  if(t.dataset.delpost){if(!arm(t,"Elimina?"))return;const id=t.dataset.delpost;const b=S.db.batch();b.delete(S.db.collection("bacheca").doc(id));b.delete(S.db.collection("bacheca_autori").doc(id));
     b.commit().then(()=>toast("Messaggio eliminato.")).catch(()=>toast("Non riesco a eliminarlo."));return}
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&S.open){S.open=null;render()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&S.sheet){S.sheet=null;render()}});
 document.addEventListener("input",e=>{if(e.target.id==="amt")updPreview();if(e.target.id==="pText"){const c=$("#pCount");if(c)c.textContent=e.target.value.length+"/280"}});
-document.addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(e.target.id==="addForm"){
-    const name=$("#pName").value.trim(),rep=$("#pRep").value.trim();if(!name)return;
+document.addEventListener("submit",async e=>{e.preventDefault();
+  if(e.target.id==="addForm"){const name=$("#pName").value.trim(),rep=$("#pRep").value.trim();if(!name)return;
     if(S.players.some(p=>p.name.toLowerCase()===name.toLowerCase()))return toast("Questo nome c'è già.");
-    try{await S.db.collection("players").add({name,reparto:rep,at:Date.now(),by:S.me});toast(`${name} entra nel mercato.`);$("#pName").value="";$("#pRep").value=""}
-    catch(err){toast("Nome non salvato: controlla la connessione.")}
-    return;
-  }
-  if(e.target.id==="postForm"){
-    const text=$("#pText").value.trim(),pid=$("#pAbout").value;if(!text)return;
+    try{await S.db.collection("players").add({name,reparto:rep,at:Date.now(),by:S.me});S.sheet=null;render();toast(`${name} entra nel mercato.`)}catch(err){toast("Nome non salvato: controlla la connessione.")}return}
+  if(e.target.id==="evForm"){const q=$("#eQ").value.trim();if(q.length<5)return toast("Scrivi una domanda un po' più lunga.");
+    const closeAt=closeTime((S.sheet||{}).close||"oggi"),feat=!!($("#eFeat")&&$("#eFeat").checked);
+    try{await S.db.collection("events").add({q,by:S.me,at:Date.now(),closeAt,status:"open",feat});S.sheet=null;S.tab="eventi";render();toast("Evento lanciato: ora tutti possono puntare.")}catch(err){toast("Evento non salvato: hai aggiornato le regole Firebase?")}return}
+  if(e.target.id==="postForm"){const text=$("#pText").value.trim(),pid=$("#pAbout").value;if(!text)return;
     const last=ls("fl_lastpost")||0;if(Date.now()-last<30000)return toast("Aspetta qualche secondo prima del prossimo messaggio.");
-    const ref=S.db.collection("bacheca").doc();const b=S.db.batch();
-    b.set(S.db.collection("bacheca_autori").doc(ref.id),{uid:S.me});
-    b.set(ref,{text,pid,at:Date.now(),risate:0});
-    try{await b.commit();ls("fl_lastpost",Date.now());$("#pText").value="";toast("Pubblicato in anonimo.")}catch(x){toast("Messaggio non pubblicato: riprova.")}
-    return;
-  }
-  if(e.target.id==="loginForm"){
-    const mode=e.submitter?.dataset.mode||"in";
-    const nick=$("#lNick").value.trim(),pin=$("#lPin").value.trim(),err=$("#lErr");err.textContent="";
-    const sl=slug(nick);
-    if(sl.length<2)return err.textContent="Il soprannome deve avere almeno 2 lettere o numeri.";
-    if(!/^\d{4}$/.test(pin))return err.textContent="Il PIN deve essere di 4 cifre.";
-    const email=sl+"@"+DOMAIN, pass="FL-"+pin+"-"+sl;
-    try{
-      if(mode==="up"){
-        const c=await firebase.auth().createUserWithEmailAndPassword(email,pass);
-        await firebase.firestore().collection("users").doc(c.user.uid).set({nick,at:Date.now()});
-      }else{
-        await firebase.auth().signInWithEmailAndPassword(email,pass);
-      }
-    }catch(x){
-      const c=x.code||"";
-      err.textContent=c.includes("email-already-in-use")?"Soprannome già preso. Se è il tuo, premi Entra.":
-        (c.includes("invalid-credential")||c.includes("wrong-password")||c.includes("user-not-found"))?"Soprannome o PIN sbagliati. Prima volta? Premi Registrati.":
-        c.includes("too-many-requests")?"Troppi tentativi, riprova tra qualche minuto.":
-        c.includes("network")?"Niente connessione. Riprova.":"Accesso non riuscito ("+c+").";
-    }
-  }
+    const ref=S.db.collection("bacheca").doc();const b=S.db.batch();b.set(S.db.collection("bacheca_autori").doc(ref.id),{uid:S.me});b.set(ref,{text,pid,at:Date.now(),risate:0});
+    try{await b.commit();ls("fl_lastpost",Date.now());$("#pText").value="";toast("Pubblicato in anonimo.")}catch(x){toast("Messaggio non pubblicato: riprova.")}return}
+  if(e.target.id==="loginForm"){const mode=e.submitter?.dataset.mode||"in";const nick=$("#lNick").value.trim(),pin=$("#lPin").value.trim(),err=$("#lErr");err.textContent="";
+    const sl=slug(nick);if(sl.length<2)return err.textContent="Il soprannome deve avere almeno 2 lettere o numeri.";if(!/^\d{4}$/.test(pin))return err.textContent="Il PIN deve essere di 4 cifre.";
+    const email=sl+"@"+DOMAIN,pass="FL-"+pin+"-"+sl;
+    try{if(mode==="up"){const c=await firebase.auth().createUserWithEmailAndPassword(email,pass);await firebase.firestore().collection("users").doc(c.user.uid).set({nick,at:Date.now()})}
+      else await firebase.auth().signInWithEmailAndPassword(email,pass)}
+    catch(x){const c=x.code||"";err.textContent=c.includes("email-already-in-use")?"Soprannome già preso. Se è il tuo, premi Entra.":
+      (c.includes("invalid-credential")||c.includes("wrong-password")||c.includes("user-not-found"))?"Soprannome o PIN sbagliati. Prima volta? Premi Registrati.":
+      c.includes("too-many-requests")?"Troppi tentativi, riprova tra qualche minuto.":c.includes("network")?"Niente connessione. Riprova.":"Accesso non riuscito ("+c+")."}}
 });
 
-/* ---------- avvio ---------- */
+/* ================= avvio ================= */
 ticks();
 if(!CFG.firebase||!CFG.firebase.apiKey||CFG.firebase.apiKey.includes("INCOLLA")){$("#setup").hidden=false}
-else{
-  firebase.initializeApp(CFG.firebase);
-  const db=firebase.firestore();S.db=db;
-  firebase.auth().onAuthStateChanged(async u=>{
-    S.unsub.forEach(f=>f());S.unsub=[];$("#banned").hidden=true;
+else{firebase.initializeApp(CFG.firebase);const db=firebase.firestore();S.db=db;
+  firebase.auth().onAuthStateChanged(async u=>{S.unsub.forEach(f=>f());S.unsub=[];$("#banned").hidden=true;
     if(!u){S.me=null;$("#app").hidden=true;$("#login").hidden=false;return}
     try{const b=await db.collection("banned").doc(u.uid).get();if(b.exists){$("#login").hidden=true;$("#app").hidden=true;$("#banned").hidden=false;return}}catch(e){}
-    S.me=u.uid;S.canEdit=(u.email||"")===slug(CFG.adminNick||"")+"@"+DOMAIN;
-    $("#login").hidden=true;$("#app").hidden=false;S.ready=false;render();
-    const loaded={p:0,b:0,e:0,u:0};let booted=false;
-    const ok=()=>{S.ready=loaded.p&&loaded.b&&loaded.e&&loaded.u;render();if(S.ready&&!booted){booted=true;checkBoom()}else if(booted&&!$("#boom").innerHTML)checkBoom()};
+    S.me=u.uid;S.canEdit=(u.email||"")===slug(CFG.adminNick||"")+"@"+DOMAIN;$("#login").hidden=true;$("#app").hidden=false;S.ready=false;render();
+    const loaded={p:0,o:0,e:0,u:0,v:0};let booted=false;
+    const ok=()=>{S.ready=Object.values(loaded).every(Boolean);render();if(S.ready&&!booted){booted=true;if(!ls("fl_guide")){ls("fl_guide",1);S.sheet={type:"guide"};render()}checkBoom()}else if(booted&&!$("#boom").innerHTML)checkBoom()};
     const on=(col,fn,k)=>S.unsub.push(db.collection(col).onSnapshot(s=>{fn(s);loaded[k]=1;ok()},()=>{loaded[k]=1;ok()}));
     on("players",s=>{S.players=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.at||0)-(b.at||0))},"p");
     on("esiti",s=>{S.esiti={};s.docs.forEach(d=>S.esiti[d.id]=d.data())},"e");
-    on("bets",s=>{S.bets={};s.docs.forEach(d=>S.bets[d.id]=d.data())},"b");
+    on("pos",s=>{S.pos={};s.docs.forEach(d=>S.pos[d.id]=d.data())},"o");
+    on("events",s=>{S.events={};s.docs.forEach(d=>S.events[d.id]=d.data())},"v");
     on("users",s=>{S.names={};s.docs.forEach(d=>S.names[d.id]=d.data().nick)},"u");
     S.unsub.push(db.collection("banned").onSnapshot(s=>{S.banned={};s.docs.forEach(d=>S.banned[d.id]=1);if(S.banned[S.me])firebase.auth().signOut();else render()},()=>{}));
     S.unsub.push(db.collection("bacheca").onSnapshot(s=>{S.posts=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{}));
     const aq=S.canEdit?db.collection("bacheca_autori"):db.collection("bacheca_autori").where("uid","==",u.uid);
     S.unsub.push(aq.onSnapshot(s=>{S.myPosts=new Set();S.authors={};s.docs.forEach(d=>{S.authors[d.id]=d.data().uid;if(d.data().uid===u.uid)S.myPosts.add(d.id)});render()},()=>{}));
   });
-  const save=()=>{if(!S.me)return;const m=market(),o={};for(const id in m)if(m[id].pct!=null)o[id]=m[id].pct;ls("fl_prev",o);ls("fl_lastvisit",Date.now())};
+  setInterval(()=>{if(S.me&&S.ready&&S.tab==="eventi"&&!S.sheet)render()},30000);
+  const save=()=>{if(!S.me)return;const o={};activeCands().forEach(p=>o[candKey(p.id)]=candPrice(p.id));ls("fl_prev",o);ls("fl_lastvisit",Date.now())};
   addEventListener("pagehide",save);document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});
 }
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
