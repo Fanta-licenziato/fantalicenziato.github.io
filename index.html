@@ -370,7 +370,7 @@ async function fire(pid){
 }
 
 document.addEventListener("click",e=>{
-  const t=e.target.closest("button");if(!t||t.type==="submit")return;
+  const t=e.target.closest("button");if(!t||(t.form&&t.type==="submit"))return;
   if(t.dataset.t){S.tab=t.dataset.t;render();return}
   if(t.dataset.go){S.tab=t.dataset.go;render();return}
   if(t.dataset.open){S.open=S.open===t.dataset.open?null:t.dataset.open;render();$("#amt")?.focus();return}
