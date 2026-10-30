@@ -33,5 +33,27 @@ service cloud.firestore {
       allow read: if signed();
       allow write: if isAdmin();
     }
+
+    // bacheca anonima: tutti leggono, nessuno vede l'autore
+    match /bacheca/{id} {
+      allow read: if signed();
+      allow create: if signed()
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 280
+        && request.resource.data.risate == 0
+        && getAfter(/databases/$(database)/documents/bacheca_autori/$(id)).data.uid == request.auth.uid;
+      allow update: if signed()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['risate'])
+        && request.resource.data.risate == resource.data.risate + 1;
+      allow delete: if isAdmin()
+        || get(/databases/$(database)/documents/bacheca_autori/$(id)).data.uid == request.auth.uid;
+    }
+
+    // chi ha scritto cosa: lo vede solo l'autore stesso e l'admin
+    match /bacheca_autori/{id} {
+      allow read: if isAdmin() || (signed() && resource.data.uid == request.auth.uid);
+      allow create: if signed() && request.resource.data.uid == request.auth.uid;
+      allow delete: if isAdmin() || (signed() && resource.data.uid == request.auth.uid);
+    }
   }
 }

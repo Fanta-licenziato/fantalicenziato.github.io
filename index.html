@@ -113,6 +113,19 @@ tr:last-child td{border-bottom:0}
 .feed div{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;font-size:14px}
 .feed div:last-child{border-bottom:0}
 .feed time{color:var(--muted);font-size:12px;white-space:nowrap;font-family:var(--f-num)}
+/* bacheca */
+.post{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.post p{margin:0;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.post .pmeta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.post .tag{font-family:var(--f-num);font-size:11px;background:var(--chip);padding:1px 6px;border-radius:3px;color:var(--ink)}
+.post .acts{display:flex;gap:6px;align-items:center}
+.laugh{background:var(--chip);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:3px 10px;font-family:var(--f-num);font-size:13px}
+.laugh[aria-pressed="true"]{background:var(--oil);color:#1a1200;border-color:var(--oil)}
+.anon{font-family:var(--f-disp);font-weight:700;font-size:15px;color:var(--hydro);text-transform:uppercase;letter-spacing:.04em}
+textarea{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:10px;width:100%;min-height:76px;resize:vertical}
+select{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:8px;min-width:0;max-width:100%}
+.composer-row{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.admin-who{font-size:11px;color:var(--oil-ink)}
 
 /* rosa */
 .form{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:10px}
@@ -124,6 +137,71 @@ tr:last-child td{border-bottom:0}
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);
   padding:10px 16px;border-radius:4px;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== v2: quadro comandi ===== */
+body{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;
+  padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+:root{--grid:rgba(13,59,115,.05);--hazard:repeating-linear-gradient(-45deg,#f5c400 0 10px,#1b1b1b 10px 20px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--grid:rgba(141,188,255,.04)}}
+:root[data-theme="dark"]{--grid:rgba(141,188,255,.04)}
+.head{position:relative;overflow:hidden;border:0;border-radius:18px;padding:20px 18px;color:#fff;
+  background:radial-gradient(120% 140% at 100% 0%,#1d5aa6 0%,#0b2f5c 55%,#071f3d 100%);box-shadow:0 12px 30px -12px rgba(7,31,61,.6)}
+.head::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:18px 18px;pointer-events:none}
+.head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--hazard)}
+.head > *{position:relative}
+.brand h1{color:#fff;font-size:clamp(40px,11vw,60px);letter-spacing:-.01em}
+.brand h1 span{color:#f2a325;text-shadow:0 0 24px rgba(242,163,37,.35)}
+.brand .sub{color:#b9cde8}
+.beta{background:var(--hazard);color:#fff;text-shadow:0 1px 0 #000,0 0 3px #000}
+.gauge{width:148px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.35))}
+#gNeedle{transition:transform 1.2s cubic-bezier(.2,1.4,.4,1)}
+.wallet{background:transparent;border:0;gap:10px;overflow:visible}
+.wallet > div{border-radius:14px;border:1px solid var(--line);box-shadow:0 4px 14px -8px rgba(13,59,115,.35)}
+.wallet > div:first-child{background:linear-gradient(135deg,#f2a325,#e07a00);border-color:transparent}
+.wallet > div:first-child .label{color:#4a2a00}.wallet > div:first-child .v{color:#1a1200}
+.wallet .v{font-size:26px}
+.userbar{padding:0 4px}
+/* barra in basso stile app */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;justify-content:space-around;gap:0;overflow:visible;
+  background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);border-bottom:0;padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--f-body);font-size:11px;font-weight:600;text-transform:none;
+  border:0;margin:0;padding:6px 4px;flex:1;min-width:0;border-radius:12px;color:var(--muted)}
+.tabs button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-selected="true"]{color:var(--hydro);background:color-mix(in srgb,var(--oil) 18%,transparent)}
+.tabs button[aria-selected="true"] svg{stroke:var(--oil-ink)}
+/* schede giocatore */
+.list{gap:12px}
+.card{border-radius:16px;padding:16px;grid-template-columns:auto minmax(0,1fr) auto;gap:8px 14px;box-shadow:0 6px 18px -12px rgba(13,59,115,.45);
+  animation:rise .5s both;animation-delay:var(--d,0ms)}
+@keyframes rise{from{transform:translateY(8px)}to{transform:none}}
+.card.hot{border:0;position:relative;padding-top:24px;background:linear-gradient(160deg,color-mix(in srgb,var(--up) 14%,var(--panel)),var(--panel) 60%);box-shadow:0 10px 26px -14px var(--up)}
+.card.hot::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;border-radius:16px 16px 0 0;background:var(--hazard)}
+.hotlabel{align-self:flex-start;font-family:var(--f-num);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--up);padding:2px 7px;border-radius:4px;margin-bottom:2px}
+.ava{position:relative;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-family:var(--f-disp);font-weight:800;font-size:20px;color:#fff;
+  background:linear-gradient(145deg,hsl(var(--h) 65% 48%),hsl(calc(var(--h) + 40) 70% 36%));box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.ava i{position:absolute;right:-6px;bottom:-6px;min-width:22px;height:22px;padding:0 5px;border-radius:11px;background:var(--ink);color:var(--bg);
+  font-style:normal;font-family:var(--f-num);font-size:11px;font-weight:700;display:grid;place-items:center;border:2px solid var(--panel)}
+.card.fired .ava{filter:grayscale(1);opacity:.7}
+.who b{font-size:24px}
+.pct{font-size:28px;letter-spacing:-.02em}
+.card.hot .pct{color:var(--up)}
+.bar{height:10px;border-radius:5px;position:relative}
+.bar::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),color-mix(in srgb,var(--panel) 70%,transparent) calc(10% - 1px) 10%)}
+.bar i{background:linear-gradient(90deg,#3fb27f,#f2a325 55%,#ff4d3d);background-size:var(--bw,100%) 100%}
+.btn{border-radius:10px;padding:9px 16px;transition:transform .1s}
+.btn:active{transform:scale(.96)}
+.btn.oil{background:linear-gradient(180deg,#f7b440,#e08a00);box-shadow:0 4px 12px -4px rgba(224,138,0,.7)}
+.card.fired{border:0;position:relative;overflow:hidden}
+.card.fired::after{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--hazard)}
+.stamp{font-size:18px;border-width:3px;border-radius:4px;background:color-mix(in srgb,var(--up) 8%,transparent)}
+.betbox{background:var(--bg);border:1px dashed var(--line);border-radius:12px;padding:12px;margin-top:6px}
+.chips button{border-radius:999px;padding:6px 12px}
+.form,.table,.feed,.post,.empty{border-radius:16px}
+.post{box-shadow:0 6px 18px -14px rgba(13,59,115,.5)}
+tr.me td{background:color-mix(in srgb,var(--oil) 18%,transparent)}
+@media (max-width:520px){.wallet .v{font-size:20px}.gauge{width:120px}.who b{font-size:21px}.pct{font-size:24px}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}#gNeedle{transition:none}}
 </style>
 <style>
 html{-webkit-text-size-adjust:100%}
@@ -140,6 +218,11 @@ body{margin:0;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:
 .userbar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted);gap:10px}
 .userbar b{color:var(--ink)}
 .linkbtn{background:none;border:0;color:var(--hydro);text-decoration:underline;padding:4px}
+
+body:has(#login:not([hidden])){background:radial-gradient(120% 80% at 80% 0%,#1d5aa6,#0b2f5c 50%,#071f3d);min-height:100vh}
+.login .brand h1{color:#fff}.login .brand h1 span{color:#f2a325}.login .brand .sub{color:#b9cde8}
+.login form{border-radius:18px;border:0;box-shadow:0 20px 40px -20px rgba(0,0,0,.6);position:relative;overflow:hidden}
+.login form::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--hazard)}
 </style>
 </head>
 <body>
@@ -169,13 +252,13 @@ body{margin:0;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:
       <div class="sub">Mercato interno di reparto <span class="beta">BETA</span></div>
     </div>
     <div class="gauge" aria-label="Pressione del mercato">
-      <svg viewBox="0 0 140 100" role="img">
-        <path d="M18 86 A54 54 0 1 1 122 86" fill="none" stroke="var(--chip)" stroke-width="12" stroke-linecap="round"/>
-        <path id="gArc" d="M18 86 A54 54 0 1 1 122 86" fill="none" stroke="var(--oil)" stroke-width="12" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
+      <svg viewBox="0 -4 140 132" role="img"><defs><linearGradient id="gGrad" x1="0" x2="1"><stop offset="0" stop-color="#3fb27f"/><stop offset=".55" stop-color="#f2a325"/><stop offset="1" stop-color="#ff4d3d"/></linearGradient></defs>
+        <circle cx="70" cy="62" r="62" fill="#071f3d"/><circle cx="70" cy="62" r="58" fill="none" stroke="#2a5a96" stroke-width="1.5"/><path d="M18 86 A54 54 0 1 1 122 86" fill="none" stroke="#18406f" stroke-width="10" stroke-linecap="round"/>
+        <path id="gArc" d="M18 86 A54 54 0 1 1 122 86" fill="none" stroke="url(#gGrad)" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/>
         <g id="gTicks"></g>
-        <line id="gNeedle" x1="70" y1="70" x2="70" y2="26" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" transform="rotate(-125 70 70)"/>
-        <circle cx="70" cy="70" r="6" fill="var(--hydro)"/>
-        <text id="gVal" x="70" y="94" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--ink)">0 bar</text>
+        <line id="gNeedle" x1="70" y1="70" x2="70" y2="26" stroke="#ffffff" stroke-width="3" stroke-linecap="round" transform="rotate(-125 70 70)"/>
+        <circle cx="70" cy="70" r="7" fill="#f2a325"/><circle cx="70" cy="70" r="3" fill="#071f3d"/>
+        <text id="gVal" x="70" y="100" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="15" font-weight="700" fill="#ffffff">0 bar</text><text x="70" y="114" text-anchor="middle" font-family="Archivo, sans-serif" font-size="8" letter-spacing="1.5" fill="#8fb3e0">PRESSIONE</text>
       </svg>
     </div>
   </header>
@@ -189,10 +272,11 @@ body{margin:0;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:
   <div class="userbar"><span>Giochi come <b id="uNick"></b> <span id="uAdmin" class="cod" hidden>ADMIN</span></span><button class="linkbtn" id="logout" type="button">Esci</button></div>
 
   <nav class="tabs" role="tablist">
-    <button role="tab" id="tab-mercato" aria-selected="true" data-t="mercato">Mercato</button>
-    <button role="tab" id="tab-classifica" aria-selected="false" data-t="classifica">Classifica</button>
-    <button role="tab" id="tab-movimenti" aria-selected="false" data-t="movimenti">Movimenti</button>
-    <button role="tab" id="tab-rosa" aria-selected="false" data-t="rosa">Rosa</button>
+    <button role="tab" id="tab-mercato" aria-selected="true" data-t="mercato"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2" /></svg><span>Mercato</span></button>
+    <button role="tab" id="tab-classifica" aria-selected="false" data-t="classifica"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg><span>Classifica</span></button>
+    <button role="tab" id="tab-movimenti" aria-selected="false" data-t="movimenti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h13l-3-3M21 17H8l3 3"/></svg><span>Movimenti</span></button>
+    <button role="tab" id="tab-bacheca" aria-selected="false" data-t="bacheca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Bacheca</span></button>
+    <button role="tab" id="tab-rosa" aria-selected="false" data-t="rosa"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg><span>Rosa</span></button>
   </nav>
 
   <main id="view"></main>
@@ -209,7 +293,7 @@ body{margin:0;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:
 <script>
 const CFG=window.FL_CONFIG||{};
 const START=CFG.startCredits||1000, BASE=100, DOMAIN="fanta-licenziato.app";
-const S={tab:"mercato",players:[],bets:{},esiti:{},me:null,canEdit:false,names:{},open:null,db:null,ready:false,unsub:[]};
+const S={tab:"mercato",players:[],bets:{},esiti:{},me:null,canEdit:false,names:{},open:null,db:null,ready:false,unsub:[],posts:[],myPosts:new Set(),authors:{}};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt=n=>Math.round(n).toLocaleString("it-IT");
@@ -258,7 +342,7 @@ function gauge(){
   $("#gVal").textContent=bar+" bar";
 }
 function ticks(){let g="";for(let i=0;i<=8;i++){const a=(-215+250*i/8)*Math.PI/180;const x1=70+42*Math.cos(a),y1=70+42*Math.sin(a),x2=70+36*Math.cos(a),y2=70+36*Math.sin(a);
-  g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--muted)" stroke-width="1.5"/>`}$("#gTicks").innerHTML=g}
+  g+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#5f86b8" stroke-width="1.5"/>`}$("#gTicks").innerHTML=g}
 function spark(pts){
   if(pts.length<2)return"";const w=110,h=26,mn=Math.min(...pts),mx=Math.max(...pts),r=mx-mn||1;
   const xy=pts.map((v,i)=>[i*(w-4)/(pts.length-1)+2,h-3-(v-mn)/r*(h-6)]);
@@ -284,11 +368,11 @@ function vMercato(){
       delta=Math.abs(d)<.05?`<span class="delta flat">= 0,0</span>`:`<span class="delta ${d>0?"up":"down"}">${d>0?"▲":"▼"} ${fq(Math.abs(d)).replace(/0$/,"")}</span>`}
     const myS=mine[p.id]||0;
     const open=S.open===p.id&&!x.fired;
-    return `<article class="card${x.fired?" fired":""}">
-      <span class="rank">${x.fired?"✕":i}</span>
-      <div class="who"><b>${esc(p.name)}</b><span class="meta"><span class="cod">${cod}</span>${p.reparto?esc(p.reparto):""}${myS?`<span>· tuoi: <span class="num">${fmt(myS)}</span></span>`:""}</span></div>
+    return `<article class="card${x.fired?" fired":""}${!x.fired&&i===1?" hot":""}" style="--d:${i*45}ms">
+      <span class="ava" style="--h:${hue(p.name)}">${ini(p.name)}<i>${x.fired?"✕":i}</i></span>
+      <div class="who">${!x.fired&&i===1?`<span class="hotlabel">Zona rossa</span>`:""}<b>${esc(p.name)}</b><span class="meta"><span class="cod">${cod}</span>${p.reparto?esc(p.reparto):""}${myS?`<span>· tuoi: <span class="num">${fmt(myS)}</span></span>`:""}</span></div>
       <div class="odds">${x.fired?`<span class="stamp">Licenziato</span><span class="delta flat">pagato a ${fq(x.q)}</span>`:`<span class="pct">${fq(x.pct*100)}%</span>${delta}`}</div>
-      ${x.fired?"":`<div class="bar"><i style="width:${(x.pct*100).toFixed(1)}%"></i></div>`}
+      ${x.fired?"":`<div class="bar"><i style="width:${(x.pct*100).toFixed(1)}%;--bw:${(100/Math.max(x.pct,0.01)).toFixed(0)}%"></i></div>`}
       <div class="row2">
         <span class="preview">Quota <b>${fq(x.q)}</b> · puntati <b>${fmt(x.s)}</b></span>
         ${x.fired?"":spark(history(p.id))}
@@ -306,6 +390,8 @@ function vMercato(){
     </article>`}).join("");
   return `<div class="list">${html}</div>`;
 }
+function hue(n){let h=0;for(const c of n)h=(h*37+c.charCodeAt(0))%360;return h}
+function ini(n){const w=n.replace(/[^\p{L}\p{N} ]/gu,"").trim().split(/\s+/).filter(x=>!/^(il|lo|la|sig|re|del|di|zio)$/i.test(x));return ((w[0]||n)[0]+(w[1]?w[1][0]:"")).toUpperCase()}
 function empty(t,d,a=""){return `<div class="empty"><h3>${t}</h3><p>${d}</p>${a}</div>`}
 
 function vClassifica(){
@@ -313,7 +399,7 @@ function vClassifica(){
   if(!ids.size)return empty("Nessun giocatore","La classifica appare alla prima registrazione.");
   const rows=[...ids].map(u=>({u,...walletOf(u)})).sort((a,b)=>b.saldo-a.saldo);
   return `<div class="table"><table><thead><tr><th>#</th><th>Giocatore</th><th class="r">In gioco</th><th class="r">Vinti</th><th class="r">Saldo</th></tr></thead><tbody>
-  ${rows.map((r,i)=>`<tr class="${r.u===S.me?"me":""}"><td class="num">${i+1}</td><td>${esc(nm(r.u))}</td><td class="r num">${fmt(r.gioco)}</td><td class="r num">${fmt(r.vinti)}</td><td class="r num"><b>${fmt(r.saldo)}</b></td></tr>`).join("")}
+  ${rows.map((r,i)=>`<tr class="${r.u===S.me?"me":""}"><td class="num">${["🥇","🥈","🥉"][i]||i+1}</td><td>${esc(nm(r.u))}</td><td class="r num">${fmt(r.gioco)}</td><td class="r num">${fmt(r.vinti)}</td><td class="r num"><b>${fmt(r.saldo)}</b></td></tr>`).join("")}
   </tbody></table></div>`;
 }
 function vMovimenti(){
@@ -334,14 +420,42 @@ function vRosa(){
   ${S.players.map((p,i)=>`<tr><td class="num">FL-${String(i+1).padStart(3,"0")}</td><td>${esc(p.name)}</td><td>${esc(p.reparto||"—")}</td><td class="r">${S.canEdit?`<button class="btn ghost" data-del="${p.id}">Rimuovi</button>`:""}</td></tr>`).join("")}
   </tbody></table></div>`:""}`;
 }
+const ANON=["Muletto","Tornio","Calibro","Bava","Truciolo","Morsa","Brugola","Pistone","Guarnizione","Valvola","Raccordo","Flangia"];
+function anonName(id){let h=0;for(const c of id)h=(h*31+c.charCodeAt(0))>>>0;return "Anonimo "+ANON[h%ANON.length]}
+function vBacheca(){
+  const opts=S.players.filter(p=>!S.esiti[p.id]).map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join("");
+  const liked=ls("fl_laughs")||{};
+  const pn=id=>(S.players.find(p=>p.id===id)||{}).name;
+  const posts=[...S.posts].sort((a,b)=>b.at-a.at).slice(0,100);
+  return `<form class="form" id="postForm">
+    <h3 style="font-size:22px">Voci di corridoio</h3>
+    <textarea id="pText" maxlength="280" placeholder="Cosa sta succedendo in reparto?" required></textarea>
+    <div class="composer-row"><select id="pAbout" aria-label="Riguarda"><option value="">Riguarda: nessuno in particolare</option>${opts}</select>
+      <span class="note" id="pCount">0/280</span><button class="btn" type="submit">Pubblica anonimo</button></div>
+    <span class="note">Gli altri vedono solo "Anonimo". L'admin può risalire all'autore e cancellare i messaggi fuori luogo.</span>
+  </form>
+  <div class="list">${posts.length?posts.map(x=>{
+    const mine=S.myPosts.has(x.id), who=S.canEdit&&S.authors[x.id]?S.names[S.authors[x.id]]||"?":null;
+    return `<article class="post"><div class="pmeta"><span class="anon">${anonName(x.id)}</span>${x.pid&&pn(x.pid)?`<span class="tag">su ${esc(pn(x.pid))}</span>`:""}</div>
+      <p>${esc(x.text)}</p>
+      <div class="pmeta"><time class="num">${new Date(x.at).toLocaleString("it-IT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</time>
+      <span class="acts">${who?`<span class="admin-who">di ${esc(who)} (lo vedi solo tu)</span>`:""}${mine||S.canEdit?`<button class="btn ghost" data-delpost="${x.id}" style="padding:3px 10px">Elimina</button>`:""}
+      <button class="laugh" data-laugh="${x.id}" aria-pressed="${!!liked[x.id]}">😂 ${x.risate||0}</button></span></div></article>`}).join("")
+    :empty("Bacheca vuota","Scrivi la prima voce di corridoio.")}</div>`;
+}
 function nm(u){if(u===S.me)return (S.names[u]||"Tu")+" (tu)";return S.names[u]||"Collega"}
 
 function render(){
   if(!S.me)return;
   gauge();wallet();
   document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===S.tab));
-  $("#view").innerHTML=S.ready?{mercato:vMercato,classifica:vClassifica,movimenti:vMovimenti,rosa:vRosa}[S.tab]()
+  const keep={},fid=document.activeElement&&document.activeElement.id;
+  document.querySelectorAll("#view input[id],#view textarea[id],#view select[id]").forEach(el=>keep[el.id]=el.value);
+  $("#view").innerHTML=S.ready?{mercato:vMercato,classifica:vClassifica,movimenti:vMovimenti,rosa:vRosa,bacheca:vBacheca}[S.tab]()
     :`<div class="empty"><h3>Collegamento al mercato…</h3><p>Sto leggendo rosa e puntate.</p></div>`;
+  for(const id in keep){const el=document.getElementById(id);if(el)el.value=keep[id]}
+  if(fid){const el=document.getElementById(fid);if(el&&el.closest("#view"))el.focus()}
+  const pc=$("#pCount"),pt=$("#pText");if(pc&&pt)pc.textContent=pt.value.length+"/280";
   updPreview();
 }
 function updPreview(){
@@ -381,8 +495,14 @@ document.addEventListener("click",e=>{
   if(t.dataset.undo){S.db.collection("esiti").doc(t.dataset.undo).delete().catch(()=>toast("Non riesco ad annullare."));return}
   if(t.dataset.del){if(t.dataset.confirm){S.db.collection("players").doc(t.dataset.del).delete().then(()=>toast("Rimosso dalla rosa.")).catch(()=>toast("Non riesco a rimuoverlo."))}else{t.dataset.confirm=1;t.textContent="Confermi?"}return}
   if(t.id==="logout"){firebase.auth().signOut();return}
+  if(t.dataset.laugh){const id=t.dataset.laugh,liked=ls("fl_laughs")||{};if(liked[id])return;
+    const x=S.posts.find(p=>p.id===id);if(!x)return;liked[id]=1;ls("fl_laughs",liked);
+    S.db.collection("bacheca").doc(id).update({risate:(x.risate||0)+1}).catch(()=>{});return}
+  if(t.dataset.delpost){const id=t.dataset.delpost;if(!t.dataset.confirm){t.dataset.confirm=1;t.textContent="Confermi?";return}
+    const b=S.db.batch();b.delete(S.db.collection("bacheca").doc(id));b.delete(S.db.collection("bacheca_autori").doc(id));
+    b.commit().then(()=>toast("Messaggio eliminato.")).catch(()=>toast("Non riesco a eliminarlo."));return}
 });
-document.addEventListener("input",e=>{if(e.target.id==="amt")updPreview()});
+document.addEventListener("input",e=>{if(e.target.id==="amt")updPreview();if(e.target.id==="pText"){const c=$("#pCount");if(c)c.textContent=e.target.value.length+"/280"}});
 document.addEventListener("submit",async e=>{
   e.preventDefault();
   if(e.target.id==="addForm"){
@@ -390,6 +510,15 @@ document.addEventListener("submit",async e=>{
     if(S.players.some(p=>p.name.toLowerCase()===name.toLowerCase()))return toast("Questo nome c'è già.");
     try{await S.db.collection("players").add({name,reparto:rep,at:Date.now(),by:S.me});toast(`${name} entra nel mercato.`);$("#pName").value="";$("#pRep").value=""}
     catch(err){toast("Nome non salvato: controlla la connessione.")}
+    return;
+  }
+  if(e.target.id==="postForm"){
+    const text=$("#pText").value.trim(),pid=$("#pAbout").value;if(!text)return;
+    const last=ls("fl_lastpost")||0;if(Date.now()-last<30000)return toast("Aspetta qualche secondo prima del prossimo messaggio.");
+    const ref=S.db.collection("bacheca").doc();const b=S.db.batch();
+    b.set(S.db.collection("bacheca_autori").doc(ref.id),{uid:S.me});
+    b.set(ref,{text,pid,at:Date.now(),risate:0});
+    try{await b.commit();ls("fl_lastpost",Date.now());$("#pText").value="";toast("Pubblicato in anonimo.")}catch(x){toast("Messaggio non pubblicato: riprova.")}
     return;
   }
   if(e.target.id==="loginForm"){
@@ -433,6 +562,9 @@ else{
     on("esiti",s=>{S.esiti={};s.docs.forEach(d=>S.esiti[d.id]=d.data())},"e");
     on("bets",s=>{S.bets={};s.docs.forEach(d=>S.bets[d.id]=d.data())},"b");
     on("users",s=>{S.names={};s.docs.forEach(d=>S.names[d.id]=d.data().nick)},"u");
+    S.unsub.push(db.collection("bacheca").onSnapshot(s=>{S.posts=s.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{}));
+    const aq=S.canEdit?db.collection("bacheca_autori"):db.collection("bacheca_autori").where("uid","==",u.uid);
+    S.unsub.push(aq.onSnapshot(s=>{S.myPosts=new Set();S.authors={};s.docs.forEach(d=>{S.authors[d.id]=d.data().uid;if(d.data().uid===u.uid)S.myPosts.add(d.id)});render()},()=>{}));
   });
   const save=()=>{if(!S.me)return;const m=market(),o={};for(const id in m)if(m[id].pct!=null)o[id]=m[id].pct;ls("fl_prev",o)};
   addEventListener("pagehide",save);document.addEventListener("visibilitychange",()=>{if(document.hidden)save()});

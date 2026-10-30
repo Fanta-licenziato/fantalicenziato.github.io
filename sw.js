@@ -1,5 +1,5 @@
 // Service worker minimo: rende l'app installabile e apre la grafica anche con rete lenta.
-const CACHE = "fl-v2";
+const CACHE = "fl-v4";
 const SHELL = ["./", "index.html", "config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener("activate", e => {
