@@ -1,0 +1,37 @@
+rules_version = '2';
+// Regole di sicurezza del Fanta Licenziato.
+// Se cambi adminNick in config.js, cambia "erre" qui sotto (tutto minuscolo, senza spazi).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function isAdmin() { return signed() && request.auth.token.email == 'erre@fanta-licenziato.app'; }
+
+    // soprannomi dei giocatori
+    match /users/{uid} {
+      allow read: if signed();
+      allow write: if signed() && request.auth.uid == uid
+        && request.resource.data.nick is string && request.resource.data.nick.size() <= 24;
+    }
+
+    // rosa: chiunque aggiunge, solo l'admin modifica o toglie
+    match /players/{id} {
+      allow read: if signed();
+      allow create: if signed()
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 40;
+      allow update, delete: if isAdmin();
+    }
+
+    // puntate: ognuno scrive solo le proprie
+    match /bets/{uid} {
+      allow read: if signed();
+      allow write: if signed() && request.auth.uid == uid;
+    }
+
+    // esiti (licenziati): solo l'admin
+    match /esiti/{id} {
+      allow read: if signed();
+      allow write: if isAdmin();
+    }
+  }
+}
